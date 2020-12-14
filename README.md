@@ -1,2 +1,18 @@
-# db1-project
-db1 project
+# ev4l.com
+
+## Tech Stack:
+PERN
+
+### Front-end:
+- React
+- Styled-components
+- Axios
+
+
+### Back-end:
+- Node.js
+- Express
+- Postgresql
+
+## Authentication
+- JWT Token
