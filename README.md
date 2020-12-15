@@ -1,4 +1,4 @@
-# cinemaeX.com
+# cinemaex.com
 
 ## Tech Stack:
 

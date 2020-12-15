@@ -1,8 +1,6 @@
-const config = require('./data.js');
-const Pool = require('pg').Pool;
+const config = require('./dbdata.json');
+const { Pool } = require('pg');
 
-const pool = new Pool({
-  ...config,
-});
+const pool = new Pool({ ...config });
 
 module.exports = pool;
