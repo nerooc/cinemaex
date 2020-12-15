@@ -3,13 +3,17 @@ const cors = require('cors');
 
 const app = express();
 
-// method inbuilt in express to recognize the incoming Request Object as a JSON Object
+// Method inbuilt in express to recognize the incoming Request Object as a JSON Object
 app.use(express.json());
 app.use(cors());
 
-// routes regarding authentication
+// Routes regarding authentication
 app.use('/auth', require('./routes/auth'));
 
+// First private route
+app.use('/menu', require('./routes/menu'));
+
+// Getting custom port from arguments
 const [runArgs] = process.argv.slice(2);
 const port = runArgs || 5000;
 
