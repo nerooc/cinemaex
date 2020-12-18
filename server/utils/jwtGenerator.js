@@ -5,7 +5,11 @@ require('dotenv').config();
 function jwtGenerator(userID) {
   // Payload is the 'body' of the token - the part that we want to
   // send to the client
-  const payload = { user: userID };
+  const payload = {
+    user: {
+      id: userID,
+    },
+  };
   return jwt.sign(payload, process.env.jwtSecret, { expiresIn: 3600 });
 }
 

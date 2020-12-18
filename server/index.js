@@ -13,6 +13,9 @@ app.use('/auth', require('./routes/auth'));
 // First private route
 app.use('/menu', require('./routes/menu'));
 
+// Test private route
+app.use('/movies', require('./routes/movies'));
+
 // Getting custom port from arguments
 const [runArgs] = process.argv.slice(2);
 const port = runArgs || 5000;

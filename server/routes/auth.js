@@ -62,7 +62,10 @@ router.post('/login', validate, async (req, res) => {
     }
 
     // Checking if the password matches, using the compare method from bcrypt
-    const validPassword = bcrypt.compare(password, user.rows[0].user_password);
+    const validPassword = await bcrypt.compare(
+      password,
+      user.rows[0].user_password
+    );
 
     // If it doesn't, return an error
     if (!validPassword) {

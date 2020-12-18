@@ -16,11 +16,11 @@ module.exports = async (req, res, next) => {
     const verify = jwt.verify(jwtToken, process.env.jwtSecret);
 
     req.user = verify.user;
+
+    next();
   } catch (err) {
     // Report errors in case they occur
     console.error(err.message);
     return res.status(403).json('Not authorized');
   }
-
-  next();
 };
