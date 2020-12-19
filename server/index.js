@@ -11,9 +11,9 @@ app.use(cors());
 app.use('/auth', require('./routes/auth'));
 
 // First private route
-app.use('/menu', require('./routes/menu'));
+app.use('/dashboard', require('./routes/dashboard'));
 
-// Test private route
+// Movies private route
 app.use('/movies', require('./routes/movies'));
 
 // Getting custom port from arguments

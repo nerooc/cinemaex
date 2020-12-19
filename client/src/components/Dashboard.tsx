@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../utils/axios';
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -9,12 +15,12 @@ interface Props {
   setAuth: (boolean: Boolean) => void;
 }
 
-const Menu: React.FC<Props> = ({ setAuth }) => {
+const Dashboard: React.FC<Props> = ({ setAuth }) => {
   const [name, setName] = useState('');
 
   async function getName() {
     try {
-      const response = await axios.get('/menu', {
+      const response = await axios.get('/dashboard', {
         headers: {
           token: localStorage.token,
         },
@@ -41,8 +47,9 @@ const Menu: React.FC<Props> = ({ setAuth }) => {
     <>
       <h1>Hello, {name}!</h1>
       <button onClick={(e) => logout(e)}>Log out</button>
+      <Link to="/movies">Search movies</Link>
     </>
   );
 };
 
-export default Menu;
+export default Dashboard;

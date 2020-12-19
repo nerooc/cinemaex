@@ -2,12 +2,12 @@ const router = require('express').Router();
 const pool = require('../database');
 const authorization = require('../middleware/authorization');
 
-// Menu route with authorization middleware
+// Dashboard route with authorization middleware
 router.get('/', authorization, async (req, res) => {
   try {
     // Getting back info from user that owns the id form payload
     const user = await pool.query(
-      'SELECT user_name FROM users WHERE user_id = $1',
+      'SELECT user_name FROM service_user WHERE id_user = $1',
       [req.user.id]
     );
     res.json(user.rows[0]);
