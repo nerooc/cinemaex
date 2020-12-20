@@ -16,6 +16,9 @@ app.use('/dashboard', require('./routes/dashboard'));
 // Movies private route
 app.use('/movies', require('./routes/movies'));
 
+// Screenings private route
+app.use('/screenings', require('./routes/screenings'));
+
 // Getting custom port from arguments
 const [runArgs] = process.argv.slice(2);
 const port = runArgs || 5000;

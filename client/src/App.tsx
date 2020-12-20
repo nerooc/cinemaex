@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from './utils/axios';
-import styled from 'styled-components';
 
-import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,21 +8,18 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-import Dashboard from './components/Dashboard';
-import Login from './components/Login';
-import Register from './components/Register';
-import Movies from './components/Movies';
-import Movie from './components/Movie';
+import { GlobalStyles } from './globalStyles';
+import Navbar from './containers/Navbar';
+import Dashboard from './containers/Dashboard';
+import Login from './containers/Login';
+import Register from './containers/Register';
+import Movies from './containers/Movies';
+import Movie from './containers/Movie';
+import Screenings from './containers/Screenings';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 toast.configure();
-
-const Container = styled.div`
-  background-color: red;
-  width: 300px;
-  height: 300px;
-`;
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -50,71 +45,83 @@ function App() {
 
   useEffect(() => {
     isAuth();
-  }, []);
+  });
 
   return isLoading ? (
     <p>Loading..</p>
   ) : (
     <Router>
-      <Container>
-        <Switch>
-          <Route
-            exact
-            path="/login"
-            render={(props) =>
-              !isAuthenticated ? (
-                <Login {...props} setAuth={setAuth} />
-              ) : (
-                <Redirect to="/dashboard" />
-              )
-            }
-          />
-          <Route
-            exact
-            path="/register"
-            render={(props) =>
-              !isAuthenticated ? (
-                <Register {...props} setAuth={setAuth} />
-              ) : (
-                <Redirect to="/dashboard" />
-              )
-            }
-          />
-          <Route
-            exact
-            path="/movies"
-            render={(props) =>
-              isAuthenticated ? (
-                <Movies {...props} setAuth={setAuth} />
-              ) : (
-                <Redirect to="/login" />
-              )
-            }
-          />
-          <Route
-            exact
-            path="/movies/:id"
-            render={(props) =>
-              isAuthenticated ? (
-                <Movie {...props} setAuth={setAuth} />
-              ) : (
-                <Redirect to="/login" />
-              )
-            }
-          />
-          <Route
-            exact
-            path="/dashboard"
-            render={(props) =>
-              isAuthenticated ? (
-                <Dashboard {...props} setAuth={setAuth} />
-              ) : (
-                <Redirect to="/login" />
-              )
-            }
-          />
-        </Switch>
-      </Container>
+      <GlobalStyles />
+      <Navbar />
+
+      <Switch>
+        <Route
+          exact
+          path="/login"
+          render={(props) =>
+            !isAuthenticated ? (
+              <Login {...props} setAuth={setAuth} />
+            ) : (
+              <Redirect to="/dashboard" />
+            )
+          }
+        />
+        <Route
+          exact
+          path="/register"
+          render={(props) =>
+            !isAuthenticated ? (
+              <Register {...props} setAuth={setAuth} />
+            ) : (
+              <Redirect to="/dashboard" />
+            )
+          }
+        />
+        <Route
+          exact
+          path="/movies"
+          render={(props) =>
+            isAuthenticated ? (
+              <Movies {...props} setAuth={setAuth} />
+            ) : (
+              <Redirect to="/login" />
+            )
+          }
+        />
+        <Route
+          exact
+          path="/movies/:id"
+          render={(props) =>
+            isAuthenticated ? (
+              <Movie {...props} setAuth={setAuth} />
+            ) : (
+              <Redirect to="/login" />
+            )
+          }
+        />
+        <Route
+          exact
+          path="/dashboard"
+          render={(props) =>
+            isAuthenticated ? (
+              <Dashboard {...props} setAuth={setAuth} />
+            ) : (
+              <Redirect to="/login" />
+            )
+          }
+        />
+        <Route
+          exact
+          path="/screenings"
+          render={(props) =>
+            isAuthenticated ? (
+              <Screenings {...props} setAuth={setAuth} />
+            ) : (
+              <Redirect to="/login" />
+            )
+          }
+        />
+      </Switch>
     </Router>
   );
 }

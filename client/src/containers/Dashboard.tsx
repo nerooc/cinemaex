@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../utils/axios';
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  Redirect,
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useAsync } from '../hooks/useAsync';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -16,26 +12,6 @@ interface Props {
 }
 
 const Dashboard: React.FC<Props> = ({ setAuth }) => {
-  const [name, setName] = useState('');
-
-  async function getName() {
-    try {
-      const response = await axios.get('/dashboard', {
-        headers: {
-          token: localStorage.token,
-        },
-      });
-
-      setName(response.data.user_name);
-    } catch (err) {
-      console.error(err.response.data);
-    }
-  }
-
-  useEffect(() => {
-    getName();
-  }, []);
-
   const logout = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     localStorage.removeItem('token');
@@ -43,9 +19,24 @@ const Dashboard: React.FC<Props> = ({ setAuth }) => {
     toast.success("You've been logged out!", { autoClose: 2000 });
   };
 
+  const getName = (): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      axios
+        .get('/dashboard', {
+          headers: {
+            token: localStorage.token,
+          },
+        })
+        .then((res) => resolve(res.data.user_name))
+        .catch((err) => reject(err));
+    });
+  };
+
+  const { execute, status, value, error } = useAsync<string>(getName, true);
+
   return (
     <>
-      <h1>Hello, {name}!</h1>
+      <h1>Hello, {value}!</h1>
       <button onClick={(e) => logout(e)}>Log out</button>
       <Link to="/movies">Search movies</Link>
     </>
