@@ -1,0 +1,13 @@
+import React from 'react';
+
+import { Container, Image, Title, Subtitle } from './styles/Item';
+
+const Item = ({ children, ...props }) => {
+  return <Container {...props}>{children}</Container>;
+};
+
+Item.Image = Image;
+Item.Title = Title;
+Item.Subtitle = Subtitle;
+
+export default Item;

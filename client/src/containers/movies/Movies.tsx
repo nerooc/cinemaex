@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
-import { useAsync } from '../hooks/useAsync';
-import axios from '../utils/axios';
+import { useAsync } from '../../hooks/useAsync';
+import axios from '../../utils/axios';
 import { Link } from 'react-router-dom';
+import { ItemList, Item } from '../../components';
+import { parseDate } from '../../utils/parseDate';
+import { FaArrowLeft } from 'react-icons/fa';
 
 interface Props {
   setAuth: (boolean: Boolean) => void;
@@ -48,26 +51,30 @@ const Movies: React.FC<Props> = ({ setAuth }) => {
         return <h1> {error} </h1>;
       case 'success':
         return (
-          <>
-            <h1>Movies</h1>
-            {/*@ts-ignore*/}
-            {value.map((movie) => (
-              <div
-                key={movie.id_movie}
-                onClick={() => postSelectedHandler(movie.id_movie)}
-              >
-                <p>{movie.movie_title}</p>
-                <img
-                  width="200px"
-                  height="300px"
-                  src={movie.movie_img}
-                  alt="movie-poster"
-                />
-              </div>
-            ))}
-
-            <Link to="/dashboard">Back to dashboard</Link>
-          </>
+          <ItemList>
+            <ItemList.Return to="/dashboard">
+              <FaArrowLeft />
+            </ItemList.Return>
+            <ItemList.Header>Movies</ItemList.Header>
+            <ItemList.Wrapper>
+              {/*@ts-ignore*/}
+              {value.map((movie) => (
+                <Item
+                  key={movie.id_movie}
+                  onClick={() => postSelectedHandler(movie.id_movie)}
+                >
+                  <Item.Image src={movie.movie_img} alt="movie-poster" />
+                  <Item.Title>{movie.movie_title}</Item.Title>
+                  <Item.Subtitle>
+                    Release date: {parseDate(movie.movie_release)}
+                  </Item.Subtitle>
+                  <Item.Subtitle>
+                    Duration: {movie.movie_duration}
+                  </Item.Subtitle>
+                </Item>
+              ))}
+            </ItemList.Wrapper>
+          </ItemList>
         );
     }
   };

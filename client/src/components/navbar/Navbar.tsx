@@ -11,6 +11,7 @@ import {
   Header,
   Links,
   Link,
+  Logout,
 } from './styles/Navbar';
 
 const Navbar = ({ children, ...props }) => {
@@ -26,5 +27,6 @@ Navbar.Overlay = Overlay;
 Navbar.Header = Header;
 Navbar.Links = Links;
 Navbar.Link = Link;
+Navbar.Logout = Logout;
 
 export default Navbar;

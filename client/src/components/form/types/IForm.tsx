@@ -3,7 +3,6 @@ import { ReactNode } from 'react';
 export interface Props {
   children?: ReactNode;
   active?: boolean;
-  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 export interface ImgProps extends Props {
@@ -17,5 +16,6 @@ export interface LinkProps extends Props {
 }
 
 export interface ClickProps extends Props {
+  forward?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }

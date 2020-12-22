@@ -9,13 +9,14 @@ import {
 } from 'react-router-dom';
 
 import { GlobalStyles } from './globalStyles';
-import Navbar from './containers/Navbar';
-import Dashboard from './containers/Dashboard';
-import Login from './containers/Login';
-import Register from './containers/Register';
-import Movies from './containers/Movies';
-import Movie from './containers/Movie';
-import Screenings from './containers/Screenings';
+import Navbar from './containers/common/Navbar';
+import Dashboard from './containers/dashboard/Dashboard';
+import Home from './containers/home/Home';
+import Login from './containers/auth/Login';
+import Register from './containers/auth/Register';
+import Movies from './containers/movies/Movies';
+import Movie from './containers/movies/Movie';
+import Screenings from './containers/screenings/Screenings';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -52,9 +53,20 @@ function App() {
   ) : (
     <Router>
       <GlobalStyles />
-      <Navbar />
+      <Navbar isAuthenticated={isAuthenticated} setAuth={setAuth} />
 
       <Switch>
+        <Route
+          exact
+          path="/"
+          render={(props) =>
+            !isAuthenticated ? (
+              <Home {...props} />
+            ) : (
+              <Redirect to="/dashboard" />
+            )
+          }
+        />
         <Route
           exact
           path="/login"
