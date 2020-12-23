@@ -1,5 +1,7 @@
 # cinemaex.com
 
+### [DEMO](https://cinemaex.herokuapp.com/)
+
 ### Front-end:
 
 - React (Compound Components)
