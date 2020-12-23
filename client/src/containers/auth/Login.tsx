@@ -7,6 +7,8 @@ import { toastConfig } from '../../constants/toastConfig';
 import { FaChevronLeft } from 'react-icons/fa';
 import { Form } from '../../components';
 
+toast.configure();
+
 interface Props {
   setAuth: (boolean: Boolean) => void;
 }

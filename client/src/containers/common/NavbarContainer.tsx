@@ -27,7 +27,7 @@ const NavbarContainer: React.FC<Props> = ({ isAuthenticated, setAuth }) => {
         {active ? <LockBody /> : <ReleaseBody />}
         <Navbar.Wrapper>
           <Navbar.Logo
-            to="/dashboard"
+            to={isAuthenticated ? '/dashboard' : '/'}
             active={active}
             onClick={() => setActive(false)}
           >
