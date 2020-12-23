@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import colors from '../../../constants/colors';
-import breakpoints from '../../../constants/breakpoints';
-import { Link } from 'react-router-dom';
-import * as Interfaces from '../types/IItem';
+import * as Interfaces from '../../types';
 
 export const Container = styled.div<Interfaces.Props>`
   display: flex;
@@ -24,8 +22,9 @@ export const Image = styled.img<Interfaces.ImgProps>`
 `;
 
 export const Title = styled.h1<Interfaces.Props>`
-  font-size: 20px;
-  margin: 8px 0;
+  font-size: 24px;
+  margin: 15px 0;
+  text-align: center;
 `;
 
 export const Subtitle = styled.h2<Interfaces.Props>`

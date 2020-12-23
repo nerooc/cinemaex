@@ -1,8 +1,8 @@
 import styled from 'styled-components';
+import { Link as LinkTo, NavLink } from 'react-router-dom';
 import colors from '../../../constants/colors';
 import breakpoints from '../../../constants/breakpoints';
-import { Link as LinkTo, NavLink } from 'react-router-dom';
-import * as Interfaces from '../types/INavbar';
+import * as Interfaces from '../../types';
 
 export const Container = styled.nav<Interfaces.Props>`
   height: 130px;
@@ -27,8 +27,9 @@ export const Logo = styled(LinkTo)<Interfaces.LinkProps>`
   z-index: 5;
   font-size: 36px;
   font-weight: bold;
-  color: ${colors.fontColor};
+  color: ${(p) => (p.active ? colors.secondaryColor : colors.fontColor)};
   text-decoration: none;
+  transition: 0.5s;
 
   @media (max-width: ${breakpoints.tablet}) {
     font-size: 24px;

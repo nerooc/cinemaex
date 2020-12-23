@@ -30,6 +30,8 @@ export const useAsync = <T, E = string>(
     if (immediate) {
       execute();
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return { execute, status, value, error };

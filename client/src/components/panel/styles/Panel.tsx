@@ -1,9 +1,8 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import colors from '../../../constants/colors';
 import breakpoints from '../../../constants/breakpoints';
-import { Link } from 'react-router-dom';
-import * as Interfaces from '../types/IPanel';
-import { Interface } from 'readline';
+import * as Interfaces from '../../types';
 
 export const Main = styled.div<Interfaces.Props>`
   margin-top: 70px;

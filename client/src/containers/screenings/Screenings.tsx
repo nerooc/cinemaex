@@ -1,17 +1,14 @@
 import React from 'react';
-import { useAsync } from '../../hooks/useAsync';
 import axios from '../../utils/axios';
-import { Link } from 'react-router-dom';
 import { parseDate } from '../../utils/parseDate';
+import { useAsync } from '../../hooks/useAsync';
 import { ItemList, Item } from '../../components';
 import { FaArrowLeft } from 'react-icons/fa';
 
-interface Props {
-  setAuth: (boolean: Boolean) => void;
-}
+interface Props {}
 
 interface ScreeningPreview {
-  id_movie: number; // to be able to redirect to movie's description
+  id_movie: number;
   id_screening: number;
   movie_title: string;
   movie_duration: string;
@@ -23,7 +20,7 @@ interface ScreeningPreview {
 
 interface ScreeningPreviews extends Array<ScreeningPreview> {}
 
-const Screenings: React.FC<Props> = ({ setAuth }) => {
+const Screenings: React.FC<Props> = () => {
   const getScreenings = (): Promise<ScreeningPreviews> => {
     return new Promise((resolve, reject) => {
       axios
@@ -37,9 +34,7 @@ const Screenings: React.FC<Props> = ({ setAuth }) => {
     });
   };
 
-  const { execute, status, value, error } = useAsync<ScreeningPreviews>(
-    getScreenings
-  );
+  const { status, value, error } = useAsync<ScreeningPreviews>(getScreenings);
 
   const renderSwitch = (param: string) => {
     switch (param) {
@@ -48,14 +43,13 @@ const Screenings: React.FC<Props> = ({ setAuth }) => {
       case 'error':
         return <h1> {error} </h1>;
       case 'success':
-        return (
+        return value !== null ? (
           <ItemList>
             <ItemList.Return to="/dashboard">
               <FaArrowLeft />
             </ItemList.Return>
             <ItemList.Header>Screenings</ItemList.Header>
             <ItemList.Wrapper>
-              {/*@ts-ignore*/}
               {value.map((screening) => (
                 <Item key={screening.id_screening}>
                   <Item.Image src={screening.movie_img} alt="movie-poster" />
@@ -69,6 +63,8 @@ const Screenings: React.FC<Props> = ({ setAuth }) => {
               ))}
             </ItemList.Wrapper>
           </ItemList>
+        ) : (
+          <p>Something went wrong!</p>
         );
     }
   };

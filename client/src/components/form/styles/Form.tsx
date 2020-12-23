@@ -1,34 +1,32 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import colors from '../../../constants/colors';
 import breakpoints from '../../../constants/breakpoints';
-import { Link } from 'react-router-dom';
-import * as Interfaces from '../types/IForm';
+import * as Interfaces from '../../types';
 
 export const Container = styled.div<Interfaces.Props>`
   display: flex;
   justify-content: center;
   align-items: center;
 
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-
   width: 600px;
+  margin: ${(p) => (p.register ? '100px auto 0 auto' : '200px auto 0 auto')};
+
   box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.25);
   border-radius: 25px;
 
   @media (max-width: ${breakpoints.tablet}) {
+    margin: 50px auto 0 auto;
     width: 90%;
   }
 `;
 
 export const Wrapper = styled.div<Interfaces.Props>`
-  width: 45%;
-  padding: 100px 0;
   display: flex;
   flex-flow: column;
   justify-content: space-between;
+  width: 45%;
+  padding: 100px 0;
 
   @media (max-width: ${breakpoints.phone}) {
     width: 60%;
@@ -45,14 +43,14 @@ export const Header = styled.h1<Interfaces.Props>`
 
 export const Input = styled.input<Interfaces.Props>`
   height: 42px;
+  margin-bottom: 10px;
+  padding: 10px;
   background-color: ${colors.secondaryBackground};
   border: 1px solid ${colors.inputBorder};
   border-radius: 10px;
-  padding: 10px;
   font-family: Quicksand;
   font-size: 15px;
   font-weight: bold;
-  margin-bottom: 10px;
 `;
 
 export const Checkbox = styled.input.attrs({

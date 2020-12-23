@@ -1,26 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import axios from './utils/axios';
-
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
 } from 'react-router-dom';
+import axios from './utils/axios';
 
-import { GlobalStyles } from './globalStyles';
-import Navbar from './containers/common/Navbar';
-import Dashboard from './containers/dashboard/Dashboard';
+import NavbarContainer from './containers/common/NavbarContainer';
 import Home from './containers/home/Home';
 import Login from './containers/auth/Login';
 import Register from './containers/auth/Register';
+import Dashboard from './containers/dashboard/Dashboard';
 import Movies from './containers/movies/Movies';
 import Movie from './containers/movies/Movie';
 import Screenings from './containers/screenings/Screenings';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-toast.configure();
+import FooterContainer from './containers/common/FooterContainer';
+import { GlobalStyles } from './globalStyles';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -53,7 +49,7 @@ function App() {
   ) : (
     <Router>
       <GlobalStyles />
-      <Navbar isAuthenticated={isAuthenticated} setAuth={setAuth} />
+      <NavbarContainer isAuthenticated={isAuthenticated} setAuth={setAuth} />
 
       <Switch>
         <Route
@@ -93,22 +89,14 @@ function App() {
           exact
           path="/movies"
           render={(props) =>
-            isAuthenticated ? (
-              <Movies {...props} setAuth={setAuth} />
-            ) : (
-              <Redirect to="/login" />
-            )
+            isAuthenticated ? <Movies {...props} /> : <Redirect to="/login" />
           }
         />
         <Route
           exact
           path="/movies/:id"
           render={(props) =>
-            isAuthenticated ? (
-              <Movie {...props} setAuth={setAuth} />
-            ) : (
-              <Redirect to="/login" />
-            )
+            isAuthenticated ? <Movie {...props} /> : <Redirect to="/login" />
           }
         />
         <Route
@@ -116,7 +104,7 @@ function App() {
           path="/dashboard"
           render={(props) =>
             isAuthenticated ? (
-              <Dashboard {...props} setAuth={setAuth} />
+              <Dashboard {...props} />
             ) : (
               <Redirect to="/login" />
             )
@@ -127,13 +115,22 @@ function App() {
           path="/screenings"
           render={(props) =>
             isAuthenticated ? (
-              <Screenings {...props} setAuth={setAuth} />
+              <Screenings {...props} />
             ) : (
               <Redirect to="/login" />
             )
           }
         />
+        <Route
+          exact
+          path="/about"
+          component={() => {
+            window.location.replace('https://tomaszgajda.com/');
+            return null;
+          }}
+        />
       </Switch>
+      <FooterContainer />
     </Router>
   );
 }

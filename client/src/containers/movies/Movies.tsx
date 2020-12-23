@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router';
-import { useAsync } from '../../hooks/useAsync';
 import axios from '../../utils/axios';
-import { Link } from 'react-router-dom';
-import { ItemList, Item } from '../../components';
 import { parseDate } from '../../utils/parseDate';
+import { useAsync } from '../../hooks/useAsync';
+import { ItemList, Item } from '../../components';
 import { FaArrowLeft } from 'react-icons/fa';
 
-interface Props {
-  setAuth: (boolean: Boolean) => void;
-}
+interface Props {}
 
 interface MoviePreview {
   id_movie: number;
@@ -21,10 +18,10 @@ interface MoviePreview {
 
 interface MoviePreviews extends Array<MoviePreview> {}
 
-const Movies: React.FC<Props> = ({ setAuth }) => {
+const Movies: React.FC<Props> = () => {
   const history = useHistory();
 
-  const postSelectedHandler = (id: number) => {
+  const movieSelectedHandler = (id: number) => {
     history.push('/movies/' + id);
   };
 
@@ -41,7 +38,7 @@ const Movies: React.FC<Props> = ({ setAuth }) => {
     });
   };
 
-  const { execute, status, value, error } = useAsync<MoviePreviews>(getMovies);
+  const { status, value, error } = useAsync<MoviePreviews>(getMovies);
 
   const renderSwitch = (param: string) => {
     switch (param) {
@@ -50,18 +47,17 @@ const Movies: React.FC<Props> = ({ setAuth }) => {
       case 'error':
         return <h1> {error} </h1>;
       case 'success':
-        return (
+        return value !== null ? (
           <ItemList>
             <ItemList.Return to="/dashboard">
               <FaArrowLeft />
             </ItemList.Return>
             <ItemList.Header>Movies</ItemList.Header>
             <ItemList.Wrapper>
-              {/*@ts-ignore*/}
               {value.map((movie) => (
                 <Item
                   key={movie.id_movie}
-                  onClick={() => postSelectedHandler(movie.id_movie)}
+                  onClick={() => movieSelectedHandler(movie.id_movie)}
                 >
                   <Item.Image src={movie.movie_img} alt="movie-poster" />
                   <Item.Title>{movie.movie_title}</Item.Title>
@@ -69,12 +65,14 @@ const Movies: React.FC<Props> = ({ setAuth }) => {
                     Release date: {parseDate(movie.movie_release)}
                   </Item.Subtitle>
                   <Item.Subtitle>
-                    Duration: {movie.movie_duration}
+                    Duration: {movie.movie_duration} min
                   </Item.Subtitle>
                 </Item>
               ))}
             </ItemList.Wrapper>
           </ItemList>
+        ) : (
+          <p>Something went wrong!</p>
         );
     }
   };

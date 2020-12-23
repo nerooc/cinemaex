@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import colors from '../../../constants/colors';
 import { Link } from 'react-router-dom';
+import colors from '../../../constants/colors';
 import breakpoints from '../../../constants/breakpoints';
-import * as Interfaces from '../types/IItemList';
+import * as Interfaces from '../../types';
 
 export const Container = styled.div<Interfaces.Props>`
   position: relative;

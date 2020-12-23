@@ -1,9 +1,9 @@
-import { Navbar } from '../../components';
-import * as ROUTES from '../../constants/routes';
 import React, { useState } from 'react';
+import { Navbar } from '../../components';
+import { LockBody, ReleaseBody } from '../../globalStyles';
 import { toast } from 'react-toastify';
-
-toast.configure();
+import { toastConfig } from '../../constants/toastConfig';
+import * as ROUTES from '../../constants/routes';
 
 interface Props {
   isAuthenticated: boolean;
@@ -17,17 +17,22 @@ const NavbarContainer: React.FC<Props> = ({ isAuthenticated, setAuth }) => {
     e.preventDefault();
     localStorage.removeItem('token');
     setAuth(false);
-    toast.success("You've been logged out!", { autoClose: 2000 });
+    toast.success("You've been logged out!", toastConfig);
   };
 
   return (
-    // CONDITIONAL RENDERING TO BE ADDED (show specific routes according to the authentication)
     <>
       <Navbar>
+        {/* There's a problem if hamburger is clicked when scrolled */}
+        {active ? <LockBody /> : <ReleaseBody />}
         <Navbar.Wrapper>
-          <Navbar.Logo to="/dashboard" onClick={() => setActive(false)}>
+          <Navbar.Logo
+            to="/dashboard"
+            active={active}
+            onClick={() => setActive(false)}
+          >
             cinema
-            <Navbar.LogoSpan active={active}>eX</Navbar.LogoSpan>
+            <Navbar.LogoSpan active={active}>eX</Navbar.LogoSpan>.
           </Navbar.Logo>
           <Navbar.Hamburger active={active} onClick={() => setActive(!active)}>
             <Navbar.Icon
@@ -44,14 +49,18 @@ const NavbarContainer: React.FC<Props> = ({ isAuthenticated, setAuth }) => {
       <Navbar.Overlay active={active}>
         <Navbar.Links onClick={() => setActive(!active)} active={active}>
           <Navbar.Header>Navigation</Navbar.Header>
-
+          <Navbar.Link exact to={ROUTES.ABOUT}>
+            About
+          </Navbar.Link>
           {isAuthenticated ? (
             <>
               <Navbar.Link exact to={ROUTES.DASHBOARD}>
                 Dashboard
               </Navbar.Link>
+
               <Navbar.Link to={ROUTES.MOVIES}>Movies</Navbar.Link>
               <Navbar.Link to={ROUTES.SCREENINGS}>Screenings</Navbar.Link>
+
               <Navbar.Logout onClick={logout}>Log out</Navbar.Logout>
             </>
           ) : (

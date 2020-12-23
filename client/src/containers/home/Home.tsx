@@ -1,5 +1,4 @@
 import React from 'react';
-import 'react-toastify/dist/ReactToastify.css';
 import { Hero } from '../../components';
 
 interface Props {}

@@ -1,3 +1,4 @@
+// Validation middleware, checking if the provided data is valid
 module.exports = function (req, res, next) {
   // Function checking if e-mail can exist using regular expression
   const validEmail = (userEmail) => {

@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from '../../utils/axios';
-
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { toastConfig } from '../../constants/toastConfig';
 import { Form } from '../../components';
 import { FaChevronLeft } from 'react-icons/fa';
-
-toast.configure();
 
 interface Props {
   setAuth: (boolean: Boolean) => void;
@@ -44,17 +41,16 @@ const Register: React.FC<Props> = ({ setAuth }) => {
     e.preventDefault();
 
     const body = { login, password, name, surname, email, newsletter };
+
     try {
       const response = await axios.post('/auth/register', body);
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
         setAuth(true);
-        toast.success('You have been registered!', { autoClose: 2000 });
+        toast.success('You have been registered!', toastConfig);
       }
     } catch (err) {
-      toast.error(err.response.data, { autoClose: 2000 });
-
-      /* Use react-toastify to show error */
+      toast.error(err.response.data, toastConfig);
     }
   };
 
@@ -73,10 +69,12 @@ const Register: React.FC<Props> = ({ setAuth }) => {
     return () => {
       document.removeEventListener('keydown', listener);
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputData]);
 
   return (
-    <Form>
+    <Form register>
       <Form.Wrapper>
         <Form.Header>Register</Form.Header>
         <Form.Input

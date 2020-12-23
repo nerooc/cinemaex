@@ -1,13 +1,17 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import colors from '../../../constants/colors';
 import breakpoints from '../../../constants/breakpoints';
-import { Link } from 'react-router-dom';
-import * as Interfaces from '../types/IHero';
+import * as Interfaces from '../../types';
 
 export const Container = styled.div<Interfaces.Props>`
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  margin-top: 180px;
+  @media (max-width: ${breakpoints.phone}) {
+    margin-top: 50px;
+  }
 `;
 
 export const TextWrapper = styled.div<Interfaces.Props>`

@@ -1,12 +1,8 @@
 # cinemaex.com
 
-## Tech Stack:
-
-PERN
-
 ### Front-end:
 
-- React
+- React (Compound Components)
 - Typescript
 - Styled-components
 - Axios
@@ -17,6 +13,6 @@ PERN
 - Express
 - Postgresql
 
-## Authentication
+## Authorization
 
 - JWT Token

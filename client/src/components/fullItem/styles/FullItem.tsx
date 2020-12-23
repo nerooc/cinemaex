@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import colors from '../../../constants/colors';
 import { Link } from 'react-router-dom';
+import colors from '../../../constants/colors';
 import breakpoints from '../../../constants/breakpoints';
-import * as Interfaces from '../types/IFullItem';
+import * as Interfaces from '../../types';
 
 export const Container = styled.div<Interfaces.Props>`
   display: flex;
@@ -11,20 +11,20 @@ export const Container = styled.div<Interfaces.Props>`
 
 export const Return = styled(Link)<Interfaces.LinkProps>`
   position: absolute;
+  top: 20px;
+  left: -25px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${colors.secondaryBackground};
   height: 50px;
   width: 50px;
   border-radius: 50%;
-  top: 20px;
-  left: -25px;
+  background-color: ${colors.primaryColor};
+  color: ${colors.secondaryBackground};
   font-size: 24px;
   font-weight: bold;
   text-decoration: none;
   transition: 0.2s;
-  background-color: ${colors.primaryColor};
 
   &:hover {
     cursor: pointer;
@@ -34,12 +34,11 @@ export const Return = styled(Link)<Interfaces.LinkProps>`
 
 export const Wrapper = styled.div<Interfaces.Props>`
   position: relative;
-  margin-top: 70px;
-
   display: flex;
   justify-content: center;
   align-items: center;
   flex-flow: row wrap;
+  margin-top: 70px;
   padding: 30px;
   border: 5px solid ${colors.primaryColor};
   border-radius: 25px;

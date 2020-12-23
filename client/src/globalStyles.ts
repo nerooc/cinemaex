@@ -10,6 +10,7 @@ export const GlobalStyles = createGlobalStyle`
 
   *:focus {
     outline: none;
+    // Outline is off temporarily (I will bring it [or some other effect] back at some point)
     // box-shadow: 0 0 5pt 2pt black;
   }
   
@@ -20,3 +21,15 @@ export const GlobalStyles = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     font-size: 16px;
 }`;
+
+export const LockBody = createGlobalStyle`
+  body { 
+    overflow: hidden; 
+  }
+`;
+
+export const ReleaseBody = createGlobalStyle`
+  body { 
+    overflow: visible; 
+  }
+`;

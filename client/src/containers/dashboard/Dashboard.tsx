@@ -1,18 +1,11 @@
 import React from 'react';
 import axios from '../../utils/axios';
-import { Link } from 'react-router-dom';
 import { useAsync } from '../../hooks/useAsync';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { Panel, Item } from '../../components';
 
-toast.configure();
+interface Props {}
 
-interface Props {
-  setAuth: (boolean: Boolean) => void;
-}
-
-const Dashboard: React.FC<Props> = ({ setAuth }) => {
+const Dashboard: React.FC<Props> = () => {
   const getName = (): Promise<string> => {
     return new Promise((resolve, reject) => {
       axios
@@ -26,7 +19,7 @@ const Dashboard: React.FC<Props> = ({ setAuth }) => {
     });
   };
 
-  const { execute, status, value, error } = useAsync<string>(getName, true);
+  const { value } = useAsync<string>(getName, true);
 
   return (
     <Panel>
