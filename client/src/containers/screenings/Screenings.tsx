@@ -4,10 +4,7 @@ import { useAsync } from '../../hooks/useAsync';
 import { ItemList } from '../../components';
 import { FaArrowLeft } from 'react-icons/fa';
 import Screening from './Screening';
-import Modal from 'react-modal';
-
-Modal.setAppElement('#root');
-//http://reactcommunity.org/react-modal/accessibility/
+import ScreeningModal from './ScreeningModal';
 
 interface Props {}
 
@@ -22,21 +19,18 @@ export interface ScreeningPreview {
   screening_hour: string;
 }
 
+export interface Details {
+  open: boolean;
+  info: any;
+}
+
 interface ScreeningPreviews extends Array<ScreeningPreview> {}
 
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
-
 const Screenings: React.FC<Props> = () => {
-  const [modalIsOpen, setModalIsOpen] = useState({ open: false, info: {} });
+  const [modalDetails, setModalDetails] = useState<Details>({
+    open: false,
+    info: {},
+  });
 
   const getScreenings = (): Promise<ScreeningPreviews> => {
     return new Promise((resolve, reject) => {
@@ -51,14 +45,14 @@ const Screenings: React.FC<Props> = () => {
     });
   };
 
-  useEffect(() => {
-    console.log(modalIsOpen);
-  }, [modalIsOpen]);
+  // useEffect(() => {
+  //   console.log(modalDetails);
+  // }, [modalDetails]);
 
   const { status, value, error } = useAsync<ScreeningPreviews>(getScreenings);
 
   const openModal = (data) => {
-    setModalIsOpen({ open: true, info: data });
+    setModalDetails({ open: true, info: data });
   };
 
   const renderSwitch = (param: string) => {
@@ -70,13 +64,10 @@ const Screenings: React.FC<Props> = () => {
       case 'success':
         return value !== null ? (
           <>
-            <Modal isOpen={modalIsOpen.open} style={customStyles}>
-              <button
-                onClick={() => setModalIsOpen({ ...modalIsOpen, open: false })}
-              >
-                Hehe
-              </button>
-            </Modal>
+            <ScreeningModal
+              details={modalDetails}
+              setDetails={setModalDetails}
+            />
             <ItemList>
               <ItemList.Return to="/dashboard">
                 <FaArrowLeft />

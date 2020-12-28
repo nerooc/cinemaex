@@ -6,3 +6,4 @@ export { default as Item } from './item/Item';
 export { default as ItemList } from './itemList/ItemList';
 export { default as FullItem } from './fullItem/FullItem';
 export { default as Footer } from './footer/Footer';
+export { default as ModalContent } from './modalContent/ModalContent';
