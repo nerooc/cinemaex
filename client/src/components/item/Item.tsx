@@ -1,6 +1,13 @@
 import React from 'react';
 
-import { Container, Image, Title, Subtitle } from './styles/Item';
+import {
+  Container,
+  Image,
+  Title,
+  Subtitle,
+  ButtonContainer,
+  Button,
+} from './styles/Item';
 
 const Item = ({ children, ...props }) => {
   return <Container {...props}>{children}</Container>;
@@ -9,5 +16,7 @@ const Item = ({ children, ...props }) => {
 Item.Image = Image;
 Item.Title = Title;
 Item.Subtitle = Subtitle;
+Item.ButtonContainer = ButtonContainer;
+Item.Button = Button;
 
 export default Item;

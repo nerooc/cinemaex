@@ -43,7 +43,7 @@ export const Wrapper = styled.div<Interfaces.Props>`
   border: 5px solid ${colors.primaryColor};
   border-radius: 25px;
 
-  @media (max-width: ${breakpoints.largeDesktop}) {
+  ${breakpoints.largeDesktop} {
     width: 90%;
   }
 `;
@@ -54,7 +54,7 @@ export const Text = styled.div<Interfaces.Props>`
   justify-content: space-between;
   padding: 50px;
 
-  @media (max-width: ${breakpoints.largeDesktop}) {
+  ${breakpoints.largeDesktop} {
     padding: 20px;
   }
 `;

@@ -56,6 +56,7 @@ const Movies: React.FC<Props> = () => {
             <ItemList.Wrapper>
               {value.map((movie) => (
                 <Item
+                  movie
                   key={movie.id_movie}
                   onClick={() => movieSelectedHandler(movie.id_movie)}
                 >

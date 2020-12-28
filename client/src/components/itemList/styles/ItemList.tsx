@@ -30,7 +30,7 @@ export const Return = styled(Link)<Interfaces.LinkProps>`
     cursor: pointer;
   }
 
-  @media (max-width: ${breakpoints.desktop}) {
+  ${breakpoints.desktop} {
     left: 30px;
     height: 40px;
     width: 40px;
@@ -45,7 +45,7 @@ export const Header = styled.h1<Interfaces.Props>`
   line-height: 140%;
   margin-bottom: 30px;
 
-  @media (max-width: ${breakpoints.phone}) {
+  ${breakpoints.phone} {
     font-size: 40px;
   }
 `;
@@ -62,7 +62,7 @@ export const Wrapper = styled.div<Interfaces.Props>`
     flex: auto;
   }
 
-  @media (max-width: ${breakpoints.largeDesktop}) {
+  ${breakpoints.largeDesktop} {
     &::after {
       content: '';
       flex: none;

@@ -42,7 +42,6 @@ const Movie: React.FC<Props> = () => {
 
   const { status, value, error } = useAsync<IMovie>(getMovie);
 
-  console.log(value);
   const renderSwitch = (param: string) => {
     switch (param) {
       case 'idle' || 'pending':

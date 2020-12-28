@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from '../../utils/axios';
-import { parseDate } from '../../utils/parseDate';
 import { useAsync } from '../../hooks/useAsync';
-import { ItemList, Item } from '../../components';
+import { ItemList } from '../../components';
 import { FaArrowLeft } from 'react-icons/fa';
+import Screening from './Screening';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
+//http://reactcommunity.org/react-modal/accessibility/
 
 interface Props {}
 
-interface ScreeningPreview {
+export interface ScreeningPreview {
   id_movie: number;
   id_screening: number;
   movie_title: string;
@@ -20,7 +24,20 @@ interface ScreeningPreview {
 
 interface ScreeningPreviews extends Array<ScreeningPreview> {}
 
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
+
 const Screenings: React.FC<Props> = () => {
+  const [modalIsOpen, setModalIsOpen] = useState({ open: false, info: {} });
+
   const getScreenings = (): Promise<ScreeningPreviews> => {
     return new Promise((resolve, reject) => {
       axios
@@ -34,7 +51,15 @@ const Screenings: React.FC<Props> = () => {
     });
   };
 
+  useEffect(() => {
+    console.log(modalIsOpen);
+  }, [modalIsOpen]);
+
   const { status, value, error } = useAsync<ScreeningPreviews>(getScreenings);
+
+  const openModal = (data) => {
+    setModalIsOpen({ open: true, info: data });
+  };
 
   const renderSwitch = (param: string) => {
     switch (param) {
@@ -44,25 +69,30 @@ const Screenings: React.FC<Props> = () => {
         return <h1> {error} </h1>;
       case 'success':
         return value !== null ? (
-          <ItemList>
-            <ItemList.Return to="/dashboard">
-              <FaArrowLeft />
-            </ItemList.Return>
-            <ItemList.Header>Screenings</ItemList.Header>
-            <ItemList.Wrapper>
-              {value.map((screening) => (
-                <Item key={screening.id_screening}>
-                  <Item.Image src={screening.movie_img} alt="movie-poster" />
-                  <Item.Title>{screening.movie_title}</Item.Title>
-
-                  <Item.Subtitle>
-                    {parseDate(screening.screening_date)}{' '}
-                    {screening.screening_hour}
-                  </Item.Subtitle>
-                </Item>
-              ))}
-            </ItemList.Wrapper>
-          </ItemList>
+          <>
+            <Modal isOpen={modalIsOpen.open} style={customStyles}>
+              <button
+                onClick={() => setModalIsOpen({ ...modalIsOpen, open: false })}
+              >
+                Hehe
+              </button>
+            </Modal>
+            <ItemList>
+              <ItemList.Return to="/dashboard">
+                <FaArrowLeft />
+              </ItemList.Return>
+              <ItemList.Header>Screenings</ItemList.Header>
+              <ItemList.Wrapper>
+                {value.map((screening) => (
+                  <Screening
+                    key={screening.id_screening}
+                    data={screening}
+                    handleClick={openModal}
+                  />
+                ))}
+              </ItemList.Wrapper>
+            </ItemList>
+          </>
         ) : (
           <p>Something went wrong!</p>
         );

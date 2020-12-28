@@ -15,7 +15,7 @@ export const Container = styled.div<Interfaces.Props>`
   box-shadow: 0px 1px 11px rgba(0, 0, 0, 0.25);
   border-radius: 25px;
 
-  @media (max-width: ${breakpoints.tablet}) {
+  ${breakpoints.tablet} {
     margin: 50px auto 0 auto;
     width: 90%;
   }
@@ -28,7 +28,7 @@ export const Wrapper = styled.div<Interfaces.Props>`
   width: 45%;
   padding: 100px 0;
 
-  @media (max-width: ${breakpoints.phone}) {
+  ${breakpoints.phone} {
     width: 60%;
   }
 `;

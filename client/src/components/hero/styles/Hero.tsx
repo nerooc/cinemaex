@@ -9,7 +9,7 @@ export const Container = styled.div<Interfaces.Props>`
   flex-flow: row wrap;
   justify-content: center;
   margin-top: 180px;
-  @media (max-width: ${breakpoints.phone}) {
+  ${breakpoints.phone} {
     margin-top: 50px;
   }
 `;
@@ -20,7 +20,7 @@ export const TextWrapper = styled.div<Interfaces.Props>`
   padding: 30px 30px;
   width: 610px;
 
-  @media (max-width: ${breakpoints.phone}) {
+  ${breakpoints.phone} {
     width: 100%;
   }
 `;
@@ -29,7 +29,7 @@ export const Image = styled.img<Interfaces.ImgProps>`
   width: 650px;
   padding: 0 30px;
 
-  @media (max-width: ${breakpoints.tablet}) {
+  ${breakpoints.tablet} {
     width: 100%;
   }
 `;
@@ -40,7 +40,7 @@ export const Header = styled.h1<Interfaces.Props>`
   font-size: 42px;
   line-height: 60px;
 
-  @media (max-width: ${breakpoints.tablet}) {
+  ${breakpoints.tablet} {
     font-size: 36px;
     line-height: 50px;
   }
@@ -52,7 +52,7 @@ export const Description = styled.p<Interfaces.Props>`
   line-height: 30px;
   padding: 50px 0;
 
-  @media (max-width: ${breakpoints.tablet}) {
+  ${breakpoints.tablet} {
     font-size: 20px;
     line-height: 25px;
     padding: 30px 0;
@@ -64,7 +64,7 @@ export const ButtonContainer = styled.div<Interfaces.Props>`
   width: 440px;
   justify-content: space-between;
 
-  @media (max-width: ${breakpoints.phone}) {
+  ${breakpoints.phone} {
     width: 100%;
   }
 `;
@@ -90,7 +90,7 @@ export const Button = styled(Link)<Interfaces.LinkProps>`
     opacity: 0.8;
   }
 
-  @media (max-width: ${breakpoints.phone}) {
+  ${breakpoints.phone} {
     width: 45%;
   }
 `;

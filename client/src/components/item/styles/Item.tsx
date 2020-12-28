@@ -11,10 +11,15 @@ export const Container = styled.div<Interfaces.Props>`
   flex-basis: 33%;
   min-width: 300px;
 
+  ${(p) =>
+    p.movie
+      ? `
   &:hover {
     cursor: pointer;
     transform: scale(1.1);
   }
+  `
+      : null}
 `;
 
 export const Image = styled.img<Interfaces.ImgProps>`
@@ -30,4 +35,13 @@ export const Title = styled.h1<Interfaces.Props>`
 export const Subtitle = styled.h2<Interfaces.Props>`
   font-size: 20px;
   color: ${colors.primaryColor};
+`;
+
+export const ButtonContainer = styled.div<Interfaces.Props>`
+  display: flex;
+  width: 200px;
+`;
+
+export const Button = styled.button<Interfaces.ClickProps>`
+  flex-grow: 1;
 `;

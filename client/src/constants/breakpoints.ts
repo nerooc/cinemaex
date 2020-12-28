@@ -1,8 +1,11 @@
+const customBreakpoint = (maxWidth: number) =>
+  `@media (max-width: ${maxWidth}px)`;
+
 const breakpoints = {
-  phone: '576px',
-  tablet: '768px',
-  desktop: '992px',
-  largeDesktop: '1200px',
+  largeDesktop: customBreakpoint(1200),
+  desktop: customBreakpoint(922),
+  tablet: customBreakpoint(768),
+  phone: customBreakpoint(576),
 };
 
 export default breakpoints;

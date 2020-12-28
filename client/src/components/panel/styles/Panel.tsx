@@ -25,7 +25,7 @@ export const Container = styled.div<Interfaces.Props>`
   border-radius: 25px;
   padding: 20px 40px;
 
-  @media (max-width: ${breakpoints.tablet}) {
+  ${breakpoints.tablet} {
     width: 90%;
   }
 `;

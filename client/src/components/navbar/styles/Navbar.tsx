@@ -17,7 +17,7 @@ export const Wrapper = styled.div<Interfaces.Props>`
   height: 100%;
   margin: 0 160px;
 
-  @media (max-width: ${breakpoints.desktop}) {
+  ${breakpoints.desktop} {
     margin: 0 30px;
   }
 `;
@@ -31,7 +31,7 @@ export const Logo = styled(LinkTo)<Interfaces.LinkProps>`
   text-decoration: none;
   transition: 0.5s;
 
-  @media (max-width: ${breakpoints.tablet}) {
+  ${breakpoints.tablet} {
     font-size: 24px;
   }
 `;
@@ -96,12 +96,12 @@ export const Header = styled.h1<Interfaces.Props>`
     height: 3px;
     background-color: white;
 
-    @media (max-width: ${breakpoints.phone}) {
+    ${breakpoints.phone} {
       width: 200px;
     }
   }
 
-  @media (max-width: ${breakpoints.phone}) {
+  ${breakpoints.phone} {
     font-size: 30px;
   }
 `;
@@ -145,7 +145,7 @@ export const Link = styled(NavLink).attrs({
     transform: translateY(-50%) rotate(45deg);
   }
 
-  @media (max-width: ${breakpoints.phone}) {
+  ${breakpoints.phone} {
     font-size: 27px;
   }
 `;
