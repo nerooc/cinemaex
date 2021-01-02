@@ -14,6 +14,10 @@ import Register from './containers/auth/Register';
 import Dashboard from './containers/dashboard/Dashboard';
 import Movies from './containers/movies/Movies';
 import Movie from './containers/movies/Movie';
+import Actors from './containers/actors/Actors';
+import Actor from './containers/actors/Actor';
+import Directors from './containers/directors/Directors';
+import Director from './containers/directors/Director';
 import Screenings from './containers/screenings/Screenings';
 import Reservations from './containers/reservations/Reservations';
 import FooterContainer from './containers/common/FooterContainer';
@@ -117,6 +121,38 @@ function App() {
           path="/movies/:id"
           render={(props) =>
             isAuthenticated ? <Movie {...props} /> : <Redirect to="/login" />
+          }
+        />
+        <Route
+          exact
+          path="/actors"
+          render={(props) =>
+            isAuthenticated ? <Actors {...props} /> : <Redirect to="/login" />
+          }
+        />
+        <Route
+          exact
+          path="/actors/:id"
+          render={(props) =>
+            isAuthenticated ? <Actor {...props} /> : <Redirect to="/login" />
+          }
+        />
+        <Route
+          exact
+          path="/directors"
+          render={(props) =>
+            isAuthenticated ? (
+              <Directors {...props} />
+            ) : (
+              <Redirect to="/login" />
+            )
+          }
+        />
+        <Route
+          exact
+          path="/directors/:id"
+          render={(props) =>
+            isAuthenticated ? <Director {...props} /> : <Redirect to="/login" />
           }
         />
         <Route

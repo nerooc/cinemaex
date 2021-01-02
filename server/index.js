@@ -17,6 +17,12 @@ app.use('/api/dashboard', require('./routes/dashboard'));
 // Movies private route
 app.use('/api/movies', require('./routes/movies'));
 
+// Actors private route
+app.use('/api/actors', require('./routes/actors'));
+
+// Directors private route
+app.use('/api/directors', require('./routes/directors'));
+
 // Screenings private route
 app.use('/api/screenings', require('./routes/screenings'));
 

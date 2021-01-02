@@ -6,6 +6,8 @@ export interface Props {
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   register?: boolean;
   movie?: boolean;
+  actor?: boolean;
+  director?: boolean;
 }
 
 export interface ImgProps extends Props {

@@ -12,7 +12,7 @@ export const Container = styled.div<Interfaces.Props>`
   min-width: 300px;
 
   ${(p) =>
-    p.movie
+    p.movie || p.actor || p.director
       ? `
   &:hover {
     cursor: pointer;

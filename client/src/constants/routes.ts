@@ -7,3 +7,5 @@ export const MOVIES = '/movies';
 export const RESERVATIONS = '/reservations';
 export const ABOUT = '/about';
 export const ADMINPANEL = '/admin-panel';
+export const ACTORS = '/actors';
+export const DIRECTORS = '/directors';

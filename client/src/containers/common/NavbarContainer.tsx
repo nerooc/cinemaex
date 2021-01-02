@@ -64,6 +64,8 @@ const NavbarContainer: React.FC<Props> = ({
               </Navbar.Link>
 
               <Navbar.Link to={ROUTES.MOVIES}>Movies</Navbar.Link>
+              <Navbar.Link to={ROUTES.ACTORS}>Actors</Navbar.Link>
+              <Navbar.Link to={ROUTES.DIRECTORS}>Directors</Navbar.Link>
               <Navbar.Link to={ROUTES.SCREENINGS}>Screenings</Navbar.Link>
               <Navbar.Link to={ROUTES.RESERVATIONS}>Reservations</Navbar.Link>
               {role === 'admin' ? (
