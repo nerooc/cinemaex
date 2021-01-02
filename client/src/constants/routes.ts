@@ -4,4 +4,6 @@ export const LOGIN = '/login';
 export const DASHBOARD = '/dashboard';
 export const SCREENINGS = '/screenings';
 export const MOVIES = '/movies';
+export const RESERVATIONS = '/reservations';
 export const ABOUT = '/about';
+export const ADMINPANEL = '/admin-panel';

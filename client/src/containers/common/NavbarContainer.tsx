@@ -7,16 +7,21 @@ import * as ROUTES from '../../constants/routes';
 
 interface Props {
   isAuthenticated: boolean;
-  setAuth: (boolean: Boolean) => void;
+  setAuth: (boolean: Boolean, role: String) => void;
+  role: string;
 }
 
-const NavbarContainer: React.FC<Props> = ({ isAuthenticated, setAuth }) => {
+const NavbarContainer: React.FC<Props> = ({
+  isAuthenticated,
+  setAuth,
+  role,
+}) => {
   const [active, setActive] = useState<boolean>(false);
 
   const logout = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     localStorage.removeItem('token');
-    setAuth(false);
+    setAuth(false, role);
     toast.success("You've been logged out!", toastConfig);
   };
 
@@ -60,6 +65,12 @@ const NavbarContainer: React.FC<Props> = ({ isAuthenticated, setAuth }) => {
 
               <Navbar.Link to={ROUTES.MOVIES}>Movies</Navbar.Link>
               <Navbar.Link to={ROUTES.SCREENINGS}>Screenings</Navbar.Link>
+              <Navbar.Link to={ROUTES.RESERVATIONS}>Reservations</Navbar.Link>
+              {role === 'admin' ? (
+                <Navbar.Link to={ROUTES.ADMINPANEL}>Admin Panel</Navbar.Link>
+              ) : (
+                ''
+              )}
 
               <Navbar.Logout onClick={logout}>Log out</Navbar.Logout>
             </>

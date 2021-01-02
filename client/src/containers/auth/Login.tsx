@@ -11,9 +11,11 @@ toast.configure();
 
 interface Props {
   setAuth: (boolean: Boolean) => void;
+  setRole: (role: string) => void;
+  role: string;
 }
 
-const Login: React.FC<Props> = ({ setAuth }) => {
+const Login: React.FC<Props> = ({ setAuth, setRole, role }) => {
   let history = useHistory();
 
   const [inputData, setInputData] = useState({
@@ -37,15 +39,16 @@ const Login: React.FC<Props> = ({ setAuth }) => {
 
     const body = { email, password };
     try {
-      const response = await axios.post('/auth/login', body);
+      const { data } = await axios.post('/auth/login', body);
 
-      if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
+      if (data.token) {
+        localStorage.setItem('token', data.token);
         setAuth(true);
+        setRole(data.role);
         toast.success('Login successful!', toastConfig);
       }
     } catch (err) {
-      toast.error(err.response.data, toastConfig);
+      toast.error(err.data, toastConfig);
     }
   };
 

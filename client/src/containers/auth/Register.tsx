@@ -9,9 +9,11 @@ import { FaChevronLeft } from 'react-icons/fa';
 
 interface Props {
   setAuth: (boolean: Boolean) => void;
+  setRole: (role: string) => void;
+  role: string;
 }
 
-const Register: React.FC<Props> = ({ setAuth }) => {
+const Register: React.FC<Props> = ({ setAuth, setRole, role }) => {
   let history = useHistory();
 
   const [inputData, setInputData] = useState({
@@ -43,14 +45,15 @@ const Register: React.FC<Props> = ({ setAuth }) => {
     const body = { login, password, name, surname, email, newsletter };
 
     try {
-      const response = await axios.post('/auth/register', body);
-      if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
+      const { data } = await axios.post('/auth/register', body);
+      if (data.token) {
+        localStorage.setItem('token', data.token);
         setAuth(true);
+        setRole(data.role);
         toast.success('You have been registered!', toastConfig);
       }
     } catch (err) {
-      toast.error(err.response.data, toastConfig);
+      toast.error(err.data, toastConfig);
     }
   };
 

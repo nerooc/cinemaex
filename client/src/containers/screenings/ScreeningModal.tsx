@@ -45,17 +45,17 @@ const ScreeningModal: React.FC<Props> = ({ details, setDetails }) => {
       seatCount: seatCount,
     };
     try {
-      const response = await axios.post('/reservations', body, {
+      const { data } = await axios.post('/reservations', body, {
         headers: {
           token: localStorage.token,
         },
       });
 
-      if (response.data) {
-        toast.success(response.data, toastConfig);
+      if (data) {
+        toast.success(data, toastConfig);
       }
     } catch (err) {
-      toast.error(err.response.data, toastConfig);
+      toast.error(err.data, toastConfig);
     }
   };
 

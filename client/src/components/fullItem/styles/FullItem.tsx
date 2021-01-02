@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import colors from '../../../constants/colors';
 import breakpoints from '../../../constants/breakpoints';
 import * as Interfaces from '../../types';
@@ -9,7 +8,7 @@ export const Container = styled.div<Interfaces.Props>`
   justify-content: center;
 `;
 
-export const Return = styled(Link)<Interfaces.LinkProps>`
+export const Return = styled.button<Interfaces.ClickProps>`
   position: absolute;
   top: 20px;
   left: -25px;

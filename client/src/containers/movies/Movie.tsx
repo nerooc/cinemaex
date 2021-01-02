@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import axios from '../../utils/axios';
 import { parseDate } from '../../utils/parseDate';
 import { useAsync } from '../../hooks/useAsync';
@@ -25,6 +25,7 @@ interface IMovie {
 }
 
 const Movie: React.FC<Props> = () => {
+  let history = useHistory();
   const params: Params = useParams();
 
   const getMovie = (): Promise<IMovie> => {
@@ -35,7 +36,7 @@ const Movie: React.FC<Props> = () => {
             token: localStorage.token,
           },
         })
-        .then((res) => resolve(res.data))
+        .then(({ data }) => resolve(data))
         .catch((err) => reject(err));
     });
   };
@@ -52,7 +53,11 @@ const Movie: React.FC<Props> = () => {
         return value !== null ? (
           <FullItem>
             <FullItem.Wrapper>
-              <FullItem.Return to={ROUTES.MOVIES}>
+              <FullItem.Return
+                onClick={() => {
+                  history.goBack();
+                }}
+              >
                 <FaArrowLeft />
               </FullItem.Return>
               <FullItem.Text>

@@ -35,8 +35,9 @@ router.post('/register', validate, async (req, res) => {
     );
 
     // Generating a token and sending it
+    const role = user.rows[0].user_role;
     const token = jwtGenerator(newUser.rows[0].id_user);
-    res.json({ token });
+    res.json({ token, role });
   } catch (err) {
     // Report errors in case they occur
     console.error(err.message);
@@ -77,8 +78,9 @@ router.post('/login', validate, async (req, res) => {
     }
 
     // Generating a token and sending it
+    const role = user.rows[0].user_role;
     const token = jwtGenerator(user.rows[0].id_user);
-    res.json({ token });
+    res.json({ token, role });
   } catch (err) {
     // Report errors in case they occur
     console.error(err.message);

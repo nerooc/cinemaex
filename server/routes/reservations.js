@@ -24,4 +24,34 @@ router.post('/', authorization, async (req, res) => {
   }
 });
 
+router.get('/', authorization, async (req, res) => {
+  try {
+    // Getting back info from user that owns the id form payload
+    const reservations = await pool.query(
+      'SELECT * FROM reservation_preview WHERE id_user = $1;',
+      [req.user.id]
+    );
+    res.json(reservations.rows);
+  } catch (err) {
+    // Report errors in case they occur
+    console.error(err.message);
+    res.status(500).json('Server Error');
+  }
+});
+
+router.delete('/:id', authorization, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleteReservation = await pool.query(
+      'DELETE FROM reservation WHERE id_reservation = $1;',
+      [id]
+    );
+    res.json('Reservation cancelled!');
+  } catch (err) {
+    // Report errors in case they occur
+    console.error(err.message);
+    res.status(500).json('Server Error');
+  }
+});
+
 module.exports = router;

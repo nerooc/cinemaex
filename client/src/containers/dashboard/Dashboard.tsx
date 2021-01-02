@@ -14,7 +14,7 @@ const Dashboard: React.FC<Props> = () => {
             token: localStorage.token,
           },
         })
-        .then((res) => resolve(res.data.user_name))
+        .then(({ data }) => resolve(data.user_name))
         .catch((err) => reject(err));
     });
   };

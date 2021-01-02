@@ -40,7 +40,7 @@ const Screenings: React.FC<Props> = () => {
             token: localStorage.token,
           },
         })
-        .then((res) => resolve(res.data))
+        .then(({ data }) => resolve(data))
         .catch((err) => reject(err));
     });
   };

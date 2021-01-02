@@ -15,24 +15,30 @@ import Dashboard from './containers/dashboard/Dashboard';
 import Movies from './containers/movies/Movies';
 import Movie from './containers/movies/Movie';
 import Screenings from './containers/screenings/Screenings';
+import Reservations from './containers/reservations/Reservations';
 import FooterContainer from './containers/common/FooterContainer';
 import { GlobalStyles } from './globalStyles';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState<any>(false);
+  const [userRole, setUserRole] = useState<any>('user');
 
   const setAuth = (boolean: Boolean) => {
     setIsAuthenticated(boolean);
   };
 
+  const setRole = (role: string) => {
+    setUserRole(role);
+  };
+
   async function isAuth() {
     try {
-      const response = await axios.get('/auth/is-verified', {
+      const { data } = await axios.get('/auth/is-verified', {
         headers: { token: localStorage.getItem('token') },
       });
 
-      setAuth(response.data);
+      setAuth(data);
     } catch (err) {
       console.error(err.message);
     }
@@ -49,7 +55,11 @@ function App() {
   ) : (
     <Router>
       <GlobalStyles />
-      <NavbarContainer isAuthenticated={isAuthenticated} setAuth={setAuth} />
+      <NavbarContainer
+        isAuthenticated={isAuthenticated}
+        setAuth={setAuth}
+        role={userRole}
+      />
 
       <Switch>
         <Route
@@ -68,7 +78,12 @@ function App() {
           path="/login"
           render={(props) =>
             !isAuthenticated ? (
-              <Login {...props} setAuth={setAuth} />
+              <Login
+                {...props}
+                setAuth={setAuth}
+                setRole={setRole}
+                role={userRole}
+              />
             ) : (
               <Redirect to="/dashboard" />
             )
@@ -79,7 +94,12 @@ function App() {
           path="/register"
           render={(props) =>
             !isAuthenticated ? (
-              <Register {...props} setAuth={setAuth} />
+              <Register
+                {...props}
+                setAuth={setAuth}
+                setRole={setRole}
+                role={userRole}
+              />
             ) : (
               <Redirect to="/dashboard" />
             )
@@ -128,6 +148,17 @@ function App() {
             window.location.replace('https://tomaszgajda.com/');
             return null;
           }}
+        />
+        <Route
+          exact
+          path="/reservations"
+          render={(props) =>
+            isAuthenticated ? (
+              <Reservations {...props} />
+            ) : (
+              <Redirect to="/login" />
+            )
+          }
         />
       </Switch>
       <FooterContainer />
