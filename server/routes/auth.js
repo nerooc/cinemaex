@@ -92,7 +92,15 @@ router.post('/login', validate, async (req, res) => {
 router.get('/is-verified', authorization, async (req, res) => {
   // Returns true if it worked through the authorization, throws error if it didn't
   try {
-    res.json(true);
+    const role = await pool.query(
+      'SELECT user_role FROM service_user WHERE id_user = $1',
+      [req.user.id]
+    );
+
+    res.json({
+      auth: true,
+      role: role.rows[0].user_role,
+    });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');

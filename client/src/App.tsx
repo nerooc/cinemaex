@@ -43,7 +43,8 @@ function App() {
         headers: { token: localStorage.getItem('token') },
       });
 
-      setAuth(data);
+      setAuth(data.auth);
+      setRole(data.role);
     } catch (err) {
       console.error(err.message);
     }

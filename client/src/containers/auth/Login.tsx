@@ -48,7 +48,8 @@ const Login: React.FC<Props> = ({ setAuth, setRole, role }) => {
         toast.success('Login successful!', toastConfig);
       }
     } catch (err) {
-      toast.error(err.data, toastConfig);
+      const msg = err.response.data;
+      toast.error(msg, toastConfig);
     }
   };
 
