@@ -20,6 +20,7 @@ import Directors from './containers/directors/Directors';
 import Director from './containers/directors/Director';
 import Screenings from './containers/screenings/Screenings';
 import Reservations from './containers/reservations/Reservations';
+import Admin from './containers/admin/Admin';
 import FooterContainer from './containers/common/FooterContainer';
 import { GlobalStyles } from './globalStyles';
 
@@ -172,6 +173,17 @@ function App() {
           render={(props) =>
             isAuthenticated ? (
               <Screenings {...props} />
+            ) : (
+              <Redirect to="/login" />
+            )
+          }
+        />
+        <Route
+          exact
+          path="/admin-panel"
+          render={(props) =>
+            isAuthenticated && userRole === 'admin' ? (
+              <Admin {...props} />
             ) : (
               <Redirect to="/login" />
             )

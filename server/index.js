@@ -29,6 +29,9 @@ app.use('/api/screenings', require('./routes/screenings'));
 // Reservations private route
 app.use('/api/reservations', require('./routes/reservations'));
 
+// Posting new data
+app.use('/api/post', require('./routes/post'));
+
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
   app.use(express.static(path.join(__dirname, '/build')));
