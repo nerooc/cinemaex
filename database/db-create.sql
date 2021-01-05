@@ -2,21 +2,11 @@
 
 CREATE DATABASE cinemaex;
 
--- CREATE TYPE access_role AS ENUM (
---   'administrator',
---   'moderator',
---   'user'
--- );
+-- ENUM MADE FOR 
+
+CREATE TYPE role_type AS ENUM ('standard', 'admin');
 
 -- TABLES
-
-CREATE TABLE room (
-                id_sala SERIAL NOT NULL,
-                room_name VARCHAR(20) NOT NULL,
-                room_seats INTEGER NOT NULL,
-                CONSTRAINT id_room PRIMARY KEY (id_sala)
-);
-
 
 CREATE TABLE service_user (
                 id_user SERIAL NOT NULL,
@@ -26,6 +16,7 @@ CREATE TABLE service_user (
                 user_surname VARCHAR(20) NOT NULL,
                 user_email VARCHAR NOT NULL,
                 newsletter BOOLEAN NOT NULL,
+                user_role role_type,
                 CONSTRAINT id_user PRIMARY KEY (id_user)
 );
 
@@ -34,6 +25,8 @@ CREATE TABLE director (
                 id_director SERIAL NOT NULL,
                 director_name VARCHAR(20) NOT NULL,
                 director_surname VARCHAR(20) NOT NULL,
+                director_description VARCHAR NOT NULL,
+                director_img VARCHAR NOT NULL,
                 CONSTRAINT id_director PRIMARY KEY (id_director)
 );
 
@@ -54,7 +47,7 @@ CREATE TABLE screening (
                 id_screening SERIAL NOT NULL,
                 id_room INTEGER NOT NULL,
                 id_movie INTEGER NOT NULL,
-                screening_date DATE NOT NULL,
+                screening_date VARCHAR NOT NULL,
                 screening_hour TIME NOT NULL,
                 screening_price INTEGER NOT NULL,
                 CONSTRAINT id_screening PRIMARY KEY (id_screening)
@@ -66,7 +59,7 @@ CREATE TABLE reservation (
                 id_user INTEGER NOT NULL,
                 id_screening INTEGER NOT NULL,
                 reservation_seatCount INTEGER NOT NULL,
-                reservation_date DATE NOT NULL,
+                reservation_date VARCHAR NOT NULL,
                 reservation_hour TIME NOT NULL,
                 CONSTRAINT id_reservation PRIMARY KEY (id_reservation, id_user, id_screening)
 );
@@ -77,6 +70,7 @@ CREATE TABLE actor (
                 actor_name VARCHAR(20) NOT NULL,
                 actor_surname VARCHAR(20) NOT NULL,
                 actor_description VARCHAR NOT NULL,
+                actor_img VARCHAR NOT NULL,
                 CONSTRAINT id_actor PRIMARY KEY (id_actor)
 );
 
@@ -85,6 +79,14 @@ CREATE TABLE actor_movie (
                 id_movie INTEGER NOT NULL,
                 id_actor INTEGER NOT NULL,
                 CONSTRAINT x PRIMARY KEY (id_movie, id_actor)
+);
+
+
+CREATE TABLE room (
+                id_sala SERIAL NOT NULL,
+                room_name VARCHAR(20) NOT NULL,
+                room_seats INTEGER NOT NULL,
+                CONSTRAINT id_room PRIMARY KEY (id_sala)
 );
 
 
@@ -136,20 +138,3 @@ REFERENCES actor (id_actor)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
-
--- VIEWS
-
--- movie preview
-CREATE VIEW movie_preview AS
-SELECT id_movie, movie_title, movie_release, movie_duration, movie_img 
-FROM movie;
-
--- movie full
-CREATE VIEW movie_full AS
-SELECT id_movie, movie_title, movie_description, movie_release, movie_duration, movie_img, director_name, director_surname 
-FROM movie m JOIN director d ON d.id_director = m.id_director;
-
--- screening preview
-CREATE VIEW screening_preview AS
-SELECT movie.id_movie, id_screening, movie_title, movie_duration, movie_img, screening_date, screening_hour, screening_price 
-FROM screening JOIN movie ON movie.id_movie = screening.id_movie;

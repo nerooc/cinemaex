@@ -1,0 +1,2 @@
+-- sprawdzanie pól
+-- sprawdzanie czy juz nie istnieje juz taki element

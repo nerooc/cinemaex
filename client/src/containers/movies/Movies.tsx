@@ -63,7 +63,7 @@ const Movies: React.FC<Props> = () => {
                   <Item.Image src={movie.movie_img} alt="movie-poster" />
                   <Item.Title>{movie.movie_title}</Item.Title>
                   <Item.Subtitle>
-                    Release date: {parseDate(movie.movie_release)}
+                    Release date: {movie.movie_release}
                   </Item.Subtitle>
                   <Item.Subtitle>
                     Duration: {movie.movie_duration} min

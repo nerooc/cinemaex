@@ -40,4 +40,42 @@ router.post('/director', authorization, async (req, res) => {
   }
 });
 
+router.post('/movie', authorization, async (req, res) => {
+  try {
+    // Destructuring the request's body
+    const { title, description, director, release, duration, img } = req.body;
+
+    // Inserting new movie
+    const newMovie = await pool.query(
+      'INSERT INTO movie (id_director, movie_title, movie_description, movie_release, movie_duration, movie_img) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+      [director, title, description, release, duration, img]
+    );
+
+    res.json('Successfully added a movie!');
+  } catch (err) {
+    // Report errors in case they occur
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+router.post('/screening', authorization, async (req, res) => {
+  try {
+    // Destructuring the request's body
+    const { room, movie, date, hour, price } = req.body;
+
+    // Inserting new movie
+    const newMovie = await pool.query(
+      'INSERT INTO screening (id_room, id_movie, screening_date, screening_hour, screening_price) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+      [room, movie, date, hour, price]
+    );
+
+    res.json('Successfully added a screening!');
+  } catch (err) {
+    // Report errors in case they occur
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;

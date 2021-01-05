@@ -13,7 +13,9 @@ const Admin: React.FC<Props> = () => {
       <button onClick={() => setActiveTab('actors')}>ActorsPanel</button>
       <button onClick={() => setActiveTab('directors')}>DirectorsPanel</button>
       <button onClick={() => setActiveTab('movies')}>MoviesPanel</button>
-      <button onClick={() => setActiveTab('screenings')}>MoviesPanel</button>
+      <button onClick={() => setActiveTab('screenings')}>
+        ScreeningsPanel
+      </button>
       {activeTab === 'actors' && <ActorsPanel />}
       {activeTab === 'directors' && <DirectorsPanel />}
       {activeTab === 'movies' && <MoviesPanel />}

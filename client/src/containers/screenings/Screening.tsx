@@ -24,7 +24,7 @@ const Screening: React.FC<Props> = ({ data, handleClick }) => {
       <Item.ButtonContainer>
         <Item.Button onClick={() => handleClick(data)}>TICKETS</Item.Button>
         <Item.Button onClick={() => history.push('/movies/' + data.id_movie)}>
-          i
+          INFO
         </Item.Button>
       </Item.ButtonContainer>
     </Item>

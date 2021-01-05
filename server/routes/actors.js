@@ -19,10 +19,9 @@ router.get('/', authorization, async (req, res) => {
 router.get('/:id', authorization, async (req, res) => {
   try {
     // Getting back info from user that owns the id form payload
-    const actor = await pool.query(
-      'SELECT * FROM actor_full WHERE id_actor = $1;',
-      [req.params.id]
-    );
+    const actor = await pool.query('SELECT * FROM get_full_actor($1);', [
+      req.params.id,
+    ]);
     res.json(actor.rows[0]);
   } catch (err) {
     // Report errors in case they occur

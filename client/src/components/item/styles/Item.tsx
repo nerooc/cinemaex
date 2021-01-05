@@ -43,5 +43,24 @@ export const ButtonContainer = styled.div<Interfaces.Props>`
 `;
 
 export const Button = styled.button<Interfaces.ClickProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 42px;
+  width: 100px;
+  background-color: #5a38fd;
+  border: none;
+  border-radius: 25px;
+  font-family: Quicksand;
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: 0.2s;
+
+  &:hover {
+    opacity: 0.5;
+    cursor: pointer;
+  }
   flex-grow: 1;
 `;
