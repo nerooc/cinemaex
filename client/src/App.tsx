@@ -23,6 +23,7 @@ import Reservations from './containers/reservations/Reservations';
 import Admin from './containers/admin/Admin';
 import FooterContainer from './containers/common/FooterContainer';
 import { GlobalStyles } from './globalStyles';
+import Loading from './containers/common/Loading';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -46,7 +47,7 @@ function App() {
       setAuth(data.auth);
       setRole(data.role);
     } catch (err) {
-      console.error(err.message);
+      console.log(err.response.data);
     }
 
     setIsLoading(false);
@@ -57,7 +58,7 @@ function App() {
   });
 
   return isLoading ? (
-    <p>Loading..</p>
+    <Loading type="spinningBubbles" color="#5A38FD" />
   ) : (
     <Router>
       <GlobalStyles />

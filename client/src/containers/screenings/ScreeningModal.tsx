@@ -19,9 +19,13 @@ interface Props {
 const ScreeningModal: React.FC<Props> = ({ details, setDetails }) => {
   const customStyles = {
     content: {
+      position: 'relative',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
       zIndex: 9999,
-      width: '80%',
-      height: '30%',
+      width: '60%',
+      height: '50%',
       top: '50%',
       left: '50%',
       right: 'auto',
@@ -39,6 +43,8 @@ const ScreeningModal: React.FC<Props> = ({ details, setDetails }) => {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
+
+    setDetails({ ...details, open: false });
 
     const body = {
       id_screening: details.info.id_screening,
@@ -66,18 +72,26 @@ const ScreeningModal: React.FC<Props> = ({ details, setDetails }) => {
   return (
     <Modal isOpen={details.open} style={customStyles}>
       <ModalContent>
+        <ModalContent.Header>Ticket reservation</ModalContent.Header>
+        <p>Movie: {details.info.movie_title}</p>
+        <p>
+          When?: {details.info.screening_date} {details.info.screening_hour}
+        </p>
+        <p>Price: {details.info.screening_price}$</p>
+        How many tickets?
         <ModalContent.Select onChange={(e) => handleAddrTypeChange(e)}>
           <option>1</option>
           <option>2</option>
           <option>3</option>
         </ModalContent.Select>
-        <button onClick={() => setDetails({ ...details, open: false })}>
-          Hehe
-        </button>
-
-        <button onClick={insertReservation}> submit </button>
-
-        {details.info.movie_title}
+        <ModalContent.Exit
+          onClick={() => setDetails({ ...details, open: false })}
+        >
+          x
+        </ModalContent.Exit>
+        <ModalContent.Button onClick={insertReservation}>
+          SUBMIT
+        </ModalContent.Button>
       </ModalContent>
     </Modal>
   );

@@ -63,9 +63,7 @@ const Movie: React.FC<Props> = () => {
               <FullItem.Text>
                 <FullItem.Header>{value?.movie_title}</FullItem.Header>
                 <FullItem.AdditionalInfo>
-                  <FullItem.Info>
-                    Release: {parseDate(value?.movie_release)}
-                  </FullItem.Info>
+                  <FullItem.Info>Release: {value?.movie_release}</FullItem.Info>
                   <FullItem.Info>
                     Duration: {value?.movie_duration} min
                   </FullItem.Info>

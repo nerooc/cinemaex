@@ -1,6 +1,73 @@
 import React, { useState } from 'react';
 import { useAsync } from '../../hooks/useAsync';
 import axios from '../../utils/axios';
+import styled from 'styled-components';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { toastConfig } from '../../constants/toastConfig';
+import Loading from '../common/Loading';
+
+toast.configure();
+
+const Header = styled.h1`
+  text-align: center;
+  padding: 30px;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-flow: column;
+  width: 50%;
+  margin: auto;
+
+  @media (max-width: 1050px) {
+    width: 80%;
+  }
+`;
+
+const Input = styled.input`
+  height: 42px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f6f6f6;
+  border: 1px solid #c5c5c5;
+  border-radius: 10px;
+  font-family: Quicksand;
+  font-size: 15px;
+  font-weight: bold;
+`;
+
+const Select = styled.select`
+  height: 42px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f6f6f6;
+  border: 1px solid #c5c5c5;
+  border-radius: 10px;
+  font-family: Quicksand;
+  font-size: 15px;
+  font-weight: bold;
+`;
+
+const Button = styled.button`
+  width: 180px;
+  background-color: #5a38fd;
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  margin: auto;
+  margin-top: 30px;
+  border-radius: 25px;
+  font-family: 'Quicksand';
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 0.5;
+    cursor: pointer;
+  }
+`;
 
 interface MovieTitle {
   id_movie: number;
@@ -55,34 +122,35 @@ const ScreeningsPanel = () => {
           token: localStorage.token,
         },
       });
-      console.log(data);
+
+      toast.success(data, toastConfig);
     } catch (err) {
-      console.log(err);
-      //toast.error(err.data, toastConfig);
+      toast.error(err.data, toastConfig);
     }
   };
 
   return (
     <>
-      {status === 'pending' && <div>Loading...</div>}
+      {status === 'pending' && (
+        <Loading type="spinningBubbles" color="#5A38FD" />
+      )}
 
       {status === 'success' && value?.length !== 0 && (
-        <div
-          style={{
-            display: 'flex',
-            flexFlow: 'column',
-            width: '50%',
-            margin: 'auto',
-          }}
-        >
-          <input name="room" onChange={handleChange} value={room} type="text" />
+        <Container>
+          <Header>Add a screening</Header>
+          <Input
+            name="room"
+            onChange={handleChange}
+            value={room}
+            type="text"
+            placeholder="Room"
+          />
 
-          <select
+          <Select
             name="movie"
             /* @ts-ignore */
             onChange={handleChange}
             value={movie}
-            placeholder="Choose the film"
           >
             {value?.map(({ id_movie, movie_title }) => {
               return (
@@ -91,18 +159,31 @@ const ScreeningsPanel = () => {
                 </option>
               );
             })}
-          </select>
-          <input name="date" onChange={handleChange} value={date} type="text" />
+          </Select>
+          <Input
+            name="date"
+            onChange={handleChange}
+            value={date}
+            type="text"
+            placeholder="Date (DD:MM:YY)"
+          />
 
-          <input name="hour" onChange={handleChange} value={hour} type="text" />
-          <input
+          <Input
+            name="hour"
+            onChange={handleChange}
+            value={hour}
+            type="text"
+            placeholder="Hour (HH:MM)"
+          />
+          <Input
             name="price"
             onChange={handleChange}
             value={price}
-            type="text"
+            type="number"
+            placeholder="Price"
           />
-          <button onClick={handleSubmit}>Add screening</button>
-        </div>
+          <Button onClick={handleSubmit}>Add a screening</Button>
+        </Container>
       )}
 
       {status === 'success' && value?.length === 0 && (

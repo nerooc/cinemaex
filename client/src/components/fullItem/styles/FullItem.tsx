@@ -18,6 +18,7 @@ export const Return = styled.button<Interfaces.ClickProps>`
   height: 50px;
   width: 50px;
   border-radius: 50%;
+  border: none;
   background-color: ${colors.primaryColor};
   color: ${colors.secondaryBackground};
   font-size: 24px;

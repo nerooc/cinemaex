@@ -4,6 +4,7 @@ import { parseDate } from '../../utils/parseDate';
 import { useAsync } from '../../hooks/useAsync';
 import Reservation from './Reservation';
 import { FaArrowLeft } from 'react-icons/fa';
+import Loading from '../common/Loading';
 
 interface Props {}
 
@@ -14,6 +15,7 @@ export interface ReservationPreview {
   id_reservation: number;
   reservation_date: string;
   reservation_hour: string;
+  reservation_seatcount: number;
   id_user: number;
 }
 
@@ -39,20 +41,32 @@ const Reservations: React.FC<Props> = () => {
 
   return (
     <div>
-      {status === 'pending' && <div>Loading...</div>}
+      {status === 'pending' && (
+        <Loading type="spinningBubbles" color="#5A38FD" />
+      )}
 
-      {status === 'success' &&
-        value?.length !== 0 /* @ts-ignore */ &&
-        value.map((reservation) => (
-          <Reservation
-            data={reservation}
-            key={reservation.id_reservation}
-            refresh={execute}
-          />
-        ))}
+      {status === 'success' && value?.length !== 0 && (
+        <>
+          <h1 style={{ textAlign: 'center', margin: '50px 0' }}>
+            Your reservations
+          </h1>
+          {
+            /* @ts-ignore */
+            value.map((reservation) => (
+              <Reservation
+                data={reservation}
+                key={reservation.id_reservation}
+                refresh={execute}
+              />
+            ))
+          }
+        </>
+      )}
 
       {status === 'success' && value?.length === 0 && (
-        <div>No reservations assigned to this account!</div>
+        <h1 style={{ textAlign: 'center', marginTop: '50px' }}>
+          No reservations assigned to this account!
+        </h1>
       )}
       {status === 'error' && <div>{error}</div>}
     </div>

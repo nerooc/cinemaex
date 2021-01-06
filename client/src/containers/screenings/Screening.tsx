@@ -1,6 +1,5 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { parseDate } from '../../utils/parseDate';
 import { Item } from '../../components';
 import { ScreeningPreview } from './Screenings';
 
@@ -18,7 +17,7 @@ const Screening: React.FC<Props> = ({ data, handleClick }) => {
       <Item.Title>{data.movie_title}</Item.Title>
 
       <Item.Subtitle>
-        {parseDate(data.screening_date)} {data.screening_hour}
+        {data.screening_date} {data.screening_hour}
       </Item.Subtitle>
 
       <Item.ButtonContainer>

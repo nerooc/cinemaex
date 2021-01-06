@@ -59,10 +59,12 @@ const Reservation: React.FC<Props> = ({ data, refresh }) => {
         flexFlow: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        width: '90%',
+        width: '60%',
         margin: 'auto',
         padding: '20px',
-        backgroundColor: '#C4C4C4',
+        backgroundColor: 'transparent',
+        border: '3px solid #5A38FD',
+        borderRadius: '25px',
         marginBottom: '30px',
       }}
     >
@@ -75,20 +77,24 @@ const Reservation: React.FC<Props> = ({ data, refresh }) => {
           listStyle: 'none',
           fontWeight: 'bold',
           fontSize: '20px',
+          textAlign: 'center',
         }}
       >
-        <li>Tytuł: {data.movie_title}</li>
-        <li>Data: {data.screening_date}</li>
-        <li>Godzina: {data.screening_hour}</li>
-        <li>ID rezerwacji: {data.id_reservation}</li>
-        <li>Data: {data.reservation_date}</li>
-        <li>Zarezerwowano: {data.reservation_hour}</li>
+        <h2>{data.movie_title}</h2>
+        <br />
+        <li>Date: {data.screening_date}</li>
+        <li>Hour: {data.screening_hour}</li>
+        <li>Reservation ID: {data.id_reservation}</li>
+        <br />
+        <li>Reservation date: {data.reservation_date}</li>
+        <li>Reservation hour: {data.reservation_hour}</li>
+        <li>Reservation count: {data.reservation_seatcount}</li>
         <Button
           onClick={() => {
             deleteReservation(data.id_reservation);
           }}
         >
-          DELETE
+          CANCEL
         </Button>
       </ul>
 

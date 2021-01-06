@@ -1,6 +1,88 @@
+//@ts-nocheck
+
 import React, { useState } from 'react';
 import { useAsync } from '../../hooks/useAsync';
 import axios from '../../utils/axios';
+import styled from 'styled-components';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { toastConfig } from '../../constants/toastConfig';
+import Loading from '../common/Loading';
+
+toast.configure();
+
+const Header = styled.h1`
+  text-align: center;
+  padding: 30px;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-flow: column;
+  width: 50%;
+  margin: auto;
+
+  @media (max-width: 1050px) {
+    width: 80%;
+  }
+`;
+
+const Input = styled.input`
+  height: 42px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f6f6f6;
+  border: 1px solid #c5c5c5;
+  border-radius: 10px;
+  font-family: Quicksand;
+  font-size: 15px;
+  font-weight: bold;
+`;
+
+const Textarea = styled.textarea`
+  height: 150px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f6f6f6;
+  border: 1px solid #c5c5c5;
+  border-radius: 10px;
+  font-family: Quicksand;
+  font-size: 15px;
+  font-weight: bold;
+  resize: vertical;
+`;
+
+const Select = styled.select`
+  height: 42px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f6f6f6;
+  border: 1px solid #c5c5c5;
+  border-radius: 10px;
+  font-family: Quicksand;
+  font-size: 15px;
+  font-weight: bold;
+`;
+
+const Button = styled.button`
+  width: 180px;
+  background-color: #5a38fd;
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  margin: auto;
+  margin-top: 30px;
+  border-radius: 25px;
+  font-family: 'Quicksand';
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 0.5;
+    cursor: pointer;
+  }
+`;
 
 interface DirectorName {
   id_director: number;
@@ -33,7 +115,7 @@ const MoviesPanel = () => {
     });
   };
 
-  const { status, value, error } = useAsync<DirectorNames>(registerDirectors);
+  let { status, value, error } = useAsync<DirectorNames>(registerDirectors);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMovie({
@@ -57,44 +139,40 @@ const MoviesPanel = () => {
           token: localStorage.token,
         },
       });
-      console.log(data);
+      toast.success(data, toastConfig);
     } catch (err) {
-      console.log(err);
-      //toast.error(err.data, toastConfig);
+      toast.error(err.data, toastConfig);
     }
   };
 
   return (
     <>
-      {status === 'pending' && <div>Loading...</div>}
-
+      {status === 'pending' && (
+        <Loading type="spinningBubbles" color="#5A38FD" />
+      )}
       {status === 'success' && value?.length !== 0 && (
-        <div
-          style={{
-            display: 'flex',
-            flexFlow: 'column',
-            width: '50%',
-            margin: 'auto',
-          }}
-        >
-          <input
+        <Container>
+          <Header>Add a movie</Header>
+          <Input
             name="title"
             onChange={handleChange}
             value={title}
             type="text"
+            placeholder="Title"
           />
-          <input
+          <Textarea
             name="description"
+            //@ts-ignore
             onChange={handleChange}
             value={description}
             type="text"
+            placeholder="Description"
           />
-          <select
+          <Select
             name="director"
             /* @ts-ignore */
             onChange={handleChange}
             value={director}
-            placeholder="Choose the film"
           >
             {value?.map(({ id_director, director_name, director_surname }) => {
               return (
@@ -103,29 +181,35 @@ const MoviesPanel = () => {
                 </option>
               );
             })}
-          </select>
+          </Select>
 
-          <input
+          <Input
             name="release"
             onChange={handleChange}
             value={release}
             type="text"
+            placeholder="Release Date"
           />
-          <input
+          <Input
             name="duration"
             onChange={handleChange}
             value={duration}
             type="text"
+            placeholder="Duration"
           />
-          <input name="img" onChange={handleChange} value={img} type="text" />
-          <button onClick={handleSubmit}>Add movie</button>
-        </div>
+          <Input
+            name="img"
+            onChange={handleChange}
+            value={img}
+            type="text"
+            placeholder="Image URL"
+          />
+          <Button onClick={handleSubmit}>Add a movie</Button>
+        </Container>
       )}
-
       {status === 'success' && value?.length === 0 && (
         <div>No reservations assigned to this account!</div>
       )}
-
       {status === 'error' && <div>{error}</div>}
     </>
   );

@@ -1,0 +1,1 @@
+-- delete screenings that already happened

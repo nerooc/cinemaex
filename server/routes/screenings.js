@@ -6,7 +6,7 @@ const authorization = require('../middleware/authorization');
 router.get('/', authorization, async (req, res) => {
   try {
     // Getting back info from user that owns the id form payload
-    const movies = await pool.query('SELECT * FROM screening_preview;');
+    const movies = await pool.query('SELECT * FROM get_sorted_screenings();');
     res.json(movies.rows);
   } catch (err) {
     // Report errors in case they occur
@@ -15,16 +15,12 @@ router.get('/', authorization, async (req, res) => {
   }
 });
 
-// Movies route with authorization middleware
-// PROBABLY WONT BE NEEDED IN THIS FORM
-router.get('/:id', authorization, async (req, res) => {
+// Screenings route with authorization middleware
+router.get('/new', authorization, async (req, res) => {
   try {
     // Getting back info from user that owns the id form payload
-    const movie = await pool.query(
-      'SELECT * FROM screening_full WHERE id_movie = $1;',
-      [req.params.id]
-    );
-    res.json(movie.rows[0]);
+    const movies = await pool.query('SELECT * FROM get_new_screenings();');
+    res.json(movies.rows);
   } catch (err) {
     // Report errors in case they occur
     console.error(err.message);

@@ -24,6 +24,7 @@ export const Container = styled.div<Interfaces.Props>`
 
 export const Image = styled.img<Interfaces.ImgProps>`
   width: 200px;
+  height: 280px;
 `;
 
 export const Title = styled.h1<Interfaces.Props>`
@@ -47,7 +48,7 @@ export const Button = styled.button<Interfaces.ClickProps>`
   justify-content: center;
   align-items: center;
   height: 42px;
-  width: 100px;
+  margin: 5px;
   background-color: #5a38fd;
   border: none;
   border-radius: 25px;

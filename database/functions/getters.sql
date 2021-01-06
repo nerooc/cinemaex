@@ -1,4 +1,31 @@
--- retrieveing full information about a movie
+-- retrieving all sorted screenings
+
+CREATE OR REPLACE FUNCTION get_sorted_screenings ()
+RETURNS SETOF screening_preview
+LANGUAGE plpgsql
+AS '
+BEGIN
+   RETURN QUERY	
+		SELECT * FROM screening_preview 
+        ORDER BY screening_preview.screening_date ASC, screening_preview.screening_hour;
+END;
+';
+
+-- retrieving 2 closest screenings for the dashboard
+
+CREATE OR REPLACE FUNCTION get_new_screenings ()
+RETURNS SETOF screening_preview
+LANGUAGE plpgsql
+AS '
+BEGIN
+   RETURN QUERY	
+		SELECT * FROM screening_preview
+        ORDER BY screening_date ASC, screening_hour
+        LIMIT 2;
+END;
+';
+
+-- retrieving full information about a movie
 
 CREATE OR REPLACE FUNCTION get_full_movie (id_movie int)
 RETURNS SETOF movie_full
@@ -11,7 +38,7 @@ BEGIN
 END;
 ';
 
--- retrieveing ids and titles of movies (for the admin panel)
+-- retrieving ids and titles of movies (for the admin panel)
 
 CREATE OR REPLACE FUNCTION get_movie_title ()
 RETURNS TABLE (id_movie INT, movie_title VARCHAR)
@@ -23,7 +50,19 @@ BEGIN
 END;
 ';
 
--- retrieveing full information about an actor
+-- retrieving ids and names of directors (for the admin panel)
+
+CREATE OR REPLACE FUNCTION get_director_name ()
+RETURNS TABLE (id_director INT, director_name VARCHAR, director_surnamename VARCHAR)
+LANGUAGE plpgsql 
+AS '
+BEGIN
+   RETURN QUERY	
+		SELECT id_director, director_name, director_surname FROM director_preview;
+END;
+';
+
+-- retrieving full information about an actor
 
 CREATE OR REPLACE FUNCTION get_full_actor (id_actor int)
 RETURNS SETOF actor_full
@@ -36,7 +75,7 @@ BEGIN
 END;
 ';
 
--- retrieveing full information about a director
+-- retrieving full information about a director
 
 CREATE OR REPLACE FUNCTION get_full_director (id_director int)
 RETURNS SETOF director_full
