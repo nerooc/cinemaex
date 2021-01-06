@@ -18,7 +18,7 @@ export const Select = styled.select<Interfaces.Props>`
   width: 100px;
   height: 40px;
   border-radius: 25px;
-  padding: 5px;
+  padding: 0 15px;
   margin-top: 10px;
   font-family: 'Quicksand';
   font-weight: bold;

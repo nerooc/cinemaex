@@ -73,11 +73,22 @@ const ScreeningModal: React.FC<Props> = ({ details, setDetails }) => {
     <Modal isOpen={details.open} style={customStyles}>
       <ModalContent>
         <ModalContent.Header>Ticket reservation</ModalContent.Header>
-        <p>Movie: {details.info.movie_title}</p>
         <p>
-          When?: {details.info.screening_date} {details.info.screening_hour}
+          Movie:{' '}
+          <span style={{ fontWeight: 'bold' }}>{details.info.movie_title}</span>
         </p>
-        <p>Price: {details.info.screening_price}$</p>
+        <p>
+          When:{' '}
+          <span style={{ fontWeight: 'bold' }}>
+            {details.info.screening_date} {details.info.screening_hour}
+          </span>
+        </p>
+        <p>
+          Price:{' '}
+          <span style={{ fontWeight: 'bold' }}>
+            {details.info.screening_price}$
+          </span>
+        </p>
         How many tickets?
         <ModalContent.Select onChange={(e) => handleAddrTypeChange(e)}>
           <option>1</option>

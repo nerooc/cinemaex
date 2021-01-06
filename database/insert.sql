@@ -1,6 +1,7 @@
 -- USERS
-INSERT INTO users (user_login, user_password, user_name, user_surname, user_email, newsletter) VALUES ('nerooc', 'pierogi123', 'Tomasz', 'Gajda', 'tomasz_gajda@outlook.com', FALSE);
-INSERT INTO users (user_login, user_password, user_name, user_surname, user_email, newsletter) VALUES ('piotrekPL', 'Test', 'Piotr', 'Babacki', 'piotrekpl@gmail.com', TRUE);
+INSERT INTO service_user (user_login, user_password, user_name, user_surname, user_email, newsletter, user_role) VALUES ('nerooc', '$2b$10$ZrAwLuYxOVBJXcN.RI5kCuLYq8ey9JjQnyJJkCftlCUNeY2xUg9Ky', 'Tomasz', 'Gajda', 'tomasz_gajda@outlook.com', FALSE, 'admin');
+INSERT INTO service_user (user_login, user_password, user_name, user_surname, user_email, newsletter, user_role) VALUES ('admin', '$2b$10$ZrAwLuYxOVBJXcN.RI5kCuLYq8ey9JjQnyJJkCftlCUNeY2xUg9Ky', 'admin', 'admin', 'admin@cinemaex.com', FALSE, 'admin');
+INSERT INTO service_user (user_login, user_password, user_name, user_surname, user_email, newsletter, user_role) VALUES ('user', '$2b$10$H9M/3hEPWAb.wrpPYCz67O7ZCBJ3A8FA5pArcUClHGl4RvldCWIpO', 'user', 'user', 'user@cinemaex.com', FALSE, 'standard');
 
 -- DIRECTORS
 INSERT INTO director(director_name, director_surname) VALUES ('Michael', 'Bay');

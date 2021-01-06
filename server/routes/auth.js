@@ -28,19 +28,22 @@ router.post('/register', validate, async (req, res) => {
     const salt = await bcrypt.genSalt(saltRound);
     const bcryptPassword = await bcrypt.hash(password, salt);
 
+    // Default role
+    const role = 'standard';
+
     // Inserting new user
     const newUser = await pool.query(
-      'INSERT INTO service_user (user_login, user_password, user_name, user_surname, user_email, newsletter) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-      [login, bcryptPassword, name, surname, email, newsletter]
+      'INSERT INTO service_user (user_login, user_password, user_name, user_surname, user_email, newsletter, user_role) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
+      [login, bcryptPassword, name, surname, email, newsletter, role]
     );
 
     // Generating a token and sending it
-    const role = user.rows[0].user_role;
     const token = jwtGenerator(newUser.rows[0].id_user);
     res.json({ token, role });
   } catch (err) {
     // Report errors in case they occur
     console.error(err.message);
+    console.log(err.message);
     res.status(500).send('Server Error');
   }
 });
