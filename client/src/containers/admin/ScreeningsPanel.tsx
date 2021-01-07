@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toastConfig } from '../../constants/toastConfig';
 import Loading from '../common/Loading';
+import DeleteScreeningPanel from './DeleteScreeningPanel';
 
 toast.configure();
 
@@ -125,7 +126,7 @@ const ScreeningsPanel = () => {
 
       toast.success(data, toastConfig);
     } catch (err) {
-      toast.error(err.data, toastConfig);
+      toast.error(err.response.data, toastConfig);
     }
   };
 
@@ -136,54 +137,57 @@ const ScreeningsPanel = () => {
       )}
 
       {status === 'success' && value?.length !== 0 && (
-        <Container>
-          <Header>Add a screening</Header>
-          <Input
-            name="room"
-            onChange={handleChange}
-            value={room}
-            type="text"
-            placeholder="Room"
-          />
+        <>
+          <Container>
+            <Header>Add a screening</Header>
+            <Input
+              name="room"
+              onChange={handleChange}
+              value={room}
+              type="text"
+              placeholder="Room (1-5)"
+            />
 
-          <Select
-            name="movie"
-            /* @ts-ignore */
-            onChange={handleChange}
-            value={movie}
-          >
-            {value?.map(({ id_movie, movie_title }) => {
-              return (
-                <option key={id_movie} value={id_movie}>
-                  {movie_title}
-                </option>
-              );
-            })}
-          </Select>
-          <Input
-            name="date"
-            onChange={handleChange}
-            value={date}
-            type="text"
-            placeholder="Date (DD:MM:YY)"
-          />
+            <Select
+              name="movie"
+              /* @ts-ignore */
+              onChange={handleChange}
+              value={movie}
+            >
+              {value?.map(({ id_movie, movie_title }) => {
+                return (
+                  <option key={id_movie} value={id_movie}>
+                    {movie_title}
+                  </option>
+                );
+              })}
+            </Select>
+            <Input
+              name="date"
+              onChange={handleChange}
+              value={date}
+              type="text"
+              placeholder="Date (DD.MM.YY)"
+            />
 
-          <Input
-            name="hour"
-            onChange={handleChange}
-            value={hour}
-            type="text"
-            placeholder="Hour (HH:MM)"
-          />
-          <Input
-            name="price"
-            onChange={handleChange}
-            value={price}
-            type="number"
-            placeholder="Price"
-          />
-          <Button onClick={handleSubmit}>Add a screening</Button>
-        </Container>
+            <Input
+              name="hour"
+              onChange={handleChange}
+              value={hour}
+              type="text"
+              placeholder="Hour (HH:MM)"
+            />
+            <Input
+              name="price"
+              onChange={handleChange}
+              value={price}
+              type="number"
+              placeholder="Price"
+            />
+            <Button onClick={handleSubmit}>Add a screening</Button>
+          </Container>
+          <DeleteScreeningPanel />
+        </>
       )}
 
       {status === 'success' && value?.length === 0 && (

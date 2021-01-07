@@ -28,6 +28,21 @@ router.get('/title', authorization, async (req, res) => {
   }
 });
 
+router.delete('/:id', authorization, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleteMovie = await pool.query(
+      'DELETE FROM movie WHERE id_movie = $1;',
+      [id]
+    );
+    res.json('Movie deleted!');
+  } catch (err) {
+    // Report errors in case they occur
+    console.error(err.message);
+    res.status(500).json('Server Error');
+  }
+});
+
 // Movies route with authorization middleware
 router.get('/:id', authorization, async (req, res) => {
   try {

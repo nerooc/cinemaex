@@ -1,3 +1,5 @@
+-- DATA GATHERING FUNCTIONS
+
 -- retrieving all sorted screenings
 
 CREATE OR REPLACE FUNCTION get_sorted_screenings ()

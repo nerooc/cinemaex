@@ -19,10 +19,10 @@ router.get('/', authorization, async (req, res) => {
 router.get('/name', authorization, async (req, res) => {
   try {
     // Getting back info from user that owns the id form payload
-    const movies = await pool.query(
+    const directors = await pool.query(
       'SELECT id_director, director_name, director_surname FROM director_preview;'
     );
-    res.json(movies.rows);
+    res.json(directors.rows);
   } catch (err) {
     // Report errors in case they occur
     console.error(err.message);
@@ -38,6 +38,21 @@ router.get('/:id', authorization, async (req, res) => {
       req.params.id,
     ]);
     res.json(director.rows[0]);
+  } catch (err) {
+    // Report errors in case they occur
+    console.error(err.message);
+    res.status(500).json('Server Error');
+  }
+});
+
+router.delete('/:id', authorization, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleteDirector = await pool.query(
+      'DELETE FROM director WHERE id_director = $1;',
+      [id]
+    );
+    res.json('Director deleted!');
   } catch (err) {
     // Report errors in case they occur
     console.error(err.message);

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 import axios from '../../utils/axios';
-import { parseDate } from '../../utils/parseDate';
 import { useAsync } from '../../hooks/useAsync';
 import { ItemList, Item } from '../../components';
 import { FaArrowLeft } from 'react-icons/fa';

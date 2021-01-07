@@ -1,3 +1,5 @@
+-- START FAKE DATA INPUT
+
 -- USERS
 INSERT INTO service_user (user_login, user_password, user_name, user_surname, user_email, newsletter, user_role) VALUES ('nerooc', '$2b$10$ZrAwLuYxOVBJXcN.RI5kCuLYq8ey9JjQnyJJkCftlCUNeY2xUg9Ky', 'Tomasz', 'Gajda', 'tomasz_gajda@outlook.com', FALSE, 'admin');
 INSERT INTO service_user (user_login, user_password, user_name, user_surname, user_email, newsletter, user_role) VALUES ('admin', '$2b$10$ZrAwLuYxOVBJXcN.RI5kCuLYq8ey9JjQnyJJkCftlCUNeY2xUg9Ky', 'admin', 'admin', 'admin@cinemaex.com', FALSE, 'admin');
@@ -38,8 +40,8 @@ INSERT INTO room (room_name, room_seats) VALUES ('7B', 200);
 INSERT INTO room (room_name, room_seats) VALUES ('8B', 200);
 
 -- SCREENINGS
-INSERT INTO screening (id_room, id_movie, screening_date, screening_hour, screening_price) VALUES (1, 1, '12/24/2020', '15:15', 30);
-INSERT INTO screening (id_room, id_movie, screening_date, screening_hour, screening_price) VALUES (2, 5, '12/25/2020', '14:15', 30);
-INSERT INTO screening (id_room, id_movie, screening_date, screening_hour, screening_price) VALUES (5, 3, '12/28/2020', '20:15', 40);
-INSERT INTO screening (id_room, id_movie, screening_date, screening_hour, screening_price) VALUES (2, 4, '12/28/2020', '20:15', 40);
-INSERT INTO screening (id_room, id_movie, screening_date, screening_hour, screening_price) VALUES (1, 5, '12/28/2020', '20:15', 40);
+INSERT INTO screening (id_room, id_movie, screening_date, screening_hour, screening_price) VALUES (1, 1, '05.02.2021', '15:15', 30);
+INSERT INTO screening (id_room, id_movie, screening_date, screening_hour, screening_price) VALUES (2, 2, '05.02.2021', '14:15', 30);
+INSERT INTO screening (id_room, id_movie, screening_date, screening_hour, screening_price) VALUES (5, 3, '08.02.2021', '20:15', 40);
+INSERT INTO screening (id_room, id_movie, screening_date, screening_hour, screening_price) VALUES (2, 18, '09.02.2021', '20:15', 40);
+INSERT INTO screening (id_room, id_movie, screening_date, screening_hour, screening_price) VALUES (1, 18, '10.02.2021', '20:15', 40);

@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toastConfig } from '../../constants/toastConfig';
 import Loading from '../common/Loading';
+import DeleteMoviePanel from './DeleteMoviePanel';
 
 toast.configure();
 
@@ -141,7 +142,7 @@ const MoviesPanel = () => {
       });
       toast.success(data, toastConfig);
     } catch (err) {
-      toast.error(err.data, toastConfig);
+      toast.error(err.response.data, toastConfig);
     }
   };
 
@@ -151,61 +152,66 @@ const MoviesPanel = () => {
         <Loading type="spinningBubbles" color="#5A38FD" />
       )}
       {status === 'success' && value?.length !== 0 && (
-        <Container>
-          <Header>Add a movie</Header>
-          <Input
-            name="title"
-            onChange={handleChange}
-            value={title}
-            type="text"
-            placeholder="Title"
-          />
-          <Textarea
-            name="description"
-            //@ts-ignore
-            onChange={handleChange}
-            value={description}
-            type="text"
-            placeholder="Description"
-          />
-          <Select
-            name="director"
-            /* @ts-ignore */
-            onChange={handleChange}
-            value={director}
-          >
-            {value?.map(({ id_director, director_name, director_surname }) => {
-              return (
-                <option key={id_director} value={id_director}>
-                  {director_name} {director_surname}
-                </option>
-              );
-            })}
-          </Select>
+        <>
+          <Container>
+            <Header>Add a movie</Header>
+            <Input
+              name="title"
+              onChange={handleChange}
+              value={title}
+              type="text"
+              placeholder="Title"
+            />
+            <Textarea
+              name="description"
+              //@ts-ignore
+              onChange={handleChange}
+              value={description}
+              type="text"
+              placeholder="Description"
+            />
+            <Select
+              name="director"
+              /* @ts-ignore */
+              onChange={handleChange}
+              value={director}
+            >
+              {value?.map(
+                ({ id_director, director_name, director_surname }) => {
+                  return (
+                    <option key={id_director} value={id_director}>
+                      {director_name} {director_surname}
+                    </option>
+                  );
+                }
+              )}
+            </Select>
 
-          <Input
-            name="release"
-            onChange={handleChange}
-            value={release}
-            type="text"
-            placeholder="Release Date"
-          />
-          <Input
-            name="duration"
-            onChange={handleChange}
-            value={duration}
-            type="text"
-            placeholder="Duration"
-          />
-          <Input
-            name="img"
-            onChange={handleChange}
-            value={img}
-            type="text"
-            placeholder="Image URL"
-          />
-          <Button onClick={handleSubmit}>Add a movie</Button>
-        </Container>
+            <Input
+              name="release"
+              onChange={handleChange}
+              value={release}
+              type="text"
+              placeholder="Release Date"
+            />
+            <Input
+              name="duration"
+              onChange={handleChange}
+              value={duration}
+              type="text"
+              placeholder="Duration"
+            />
+            <Input
+              name="img"
+              onChange={handleChange}
+              value={img}
+              type="text"
+              placeholder="Image URL"
+            />
+            <Button onClick={handleSubmit}>Add a movie</Button>
+          </Container>
+          <DeleteMoviePanel />
+        </>
       )}
       {status === 'success' && value?.length === 0 && (
         <div>No reservations assigned to this account!</div>

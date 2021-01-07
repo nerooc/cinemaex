@@ -17,7 +17,7 @@ router.post('/actor', authorization, async (req, res) => {
   } catch (err) {
     // Report errors in case they occur
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).send(err.message);
   }
 });
 
@@ -36,7 +36,7 @@ router.post('/director', authorization, async (req, res) => {
   } catch (err) {
     // Report errors in case they occur
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).send(err.message);
   }
 });
 
@@ -55,7 +55,7 @@ router.post('/movie', authorization, async (req, res) => {
   } catch (err) {
     // Report errors in case they occur
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).send(err.message);
   }
 });
 
@@ -74,7 +74,7 @@ router.post('/screening', authorization, async (req, res) => {
   } catch (err) {
     // Report errors in case they occur
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).send(err.message);
   }
 });
 

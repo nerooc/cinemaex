@@ -1,4 +1,4 @@
--- VIEWS
+-- VIEWS INSIDE THE DATABASE
 
 -- movie preview
 CREATE VIEW movie_preview AS

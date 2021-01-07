@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toastConfig } from '../../constants/toastConfig';
+import DeleteActorPanel from './DeleteActorPanel';
 
 toast.configure();
 
@@ -99,44 +100,48 @@ const ActorsPanel = () => {
       });
       toast.success(data, toastConfig);
     } catch (err) {
-      toast.error(err.data, toastConfig);
+      toast.error(err.response.data, toastConfig);
     }
   };
 
   return (
-    <Container>
-      <Header>Add an actor</Header>
-      <Input
-        name="name"
-        onChange={handleChange}
-        value={name}
-        type="text"
-        placeholder="Name"
-      />
-      <Input
-        name="surname"
-        onChange={handleChange}
-        value={surname}
-        type="text"
-        placeholder="Surname"
-      />
-      <Textarea
-        name="description"
-        //@ts-ignore
-        onChange={handleChange}
-        value={description}
-        type="text"
-        placeholder="Description"
-      />
-      <Input
-        name="img"
-        onChange={handleChange}
-        value={img}
-        type="text"
-        placeholder="Image URL"
-      />
-      <Button onClick={handleSubmit}>Add an actor</Button>
-    </Container>
+    <>
+      <Container>
+        <Header>Add an actor</Header>
+        <Input
+          name="name"
+          onChange={handleChange}
+          value={name}
+          type="text"
+          placeholder="Name"
+        />
+        <Input
+          name="surname"
+          onChange={handleChange}
+          value={surname}
+          type="text"
+          placeholder="Surname"
+        />
+        <Textarea
+          name="description"
+          //@ts-ignore
+          onChange={handleChange}
+          value={description}
+          type="text"
+          placeholder="Description"
+        />
+        <Input
+          name="img"
+          onChange={handleChange}
+          value={img}
+          type="text"
+          placeholder="Image URL"
+        />
+        <Button onClick={handleSubmit}>Add an actor</Button>
+      </Container>
+
+      <DeleteActorPanel />
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import axios from '../../utils/axios';
 import { useAsync } from '../../hooks/useAsync';
 import { Panel, Item } from '../../components';
@@ -20,18 +20,18 @@ interface ScreeningPreview {
 interface ScreeningPreviews extends Array<ScreeningPreview> {}
 
 const Dashboard: React.FC<Props> = () => {
-  const getName = (): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      axios
-        .get('/dashboard', {
-          headers: {
-            token: localStorage.token,
-          },
-        })
-        .then(({ data }) => resolve(data.user_name))
-        .catch((err) => reject(err));
-    });
-  };
+  // const getName = (): Promise<string> => {
+  //   return new Promise((resolve, reject) => {
+  //     axios
+  //       .get('/dashboard', {
+  //         headers: {
+  //           token: localStorage.token,
+  //         },
+  //       })
+  //       .then(({ data }) => resolve(data.user_name))
+  //       .catch((err) => reject(err));
+  //   });
+  // };
 
   const getScreenings = (): Promise<ScreeningPreviews> => {
     return new Promise((resolve, reject) => {
@@ -65,7 +65,7 @@ const Dashboard: React.FC<Props> = () => {
                 //@ts-ignore
                 value.map((screening) => {
                   return (
-                    <Item>
+                    <Item key={screening.id_screening}>
                       <Item.Image
                         src={screening.movie_img}
                         alt="movie-preview"

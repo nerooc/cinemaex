@@ -1,7 +1,6 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import axios from '../../utils/axios';
-import { parseDate } from '../../utils/parseDate';
 import { useAsync } from '../../hooks/useAsync';
 import { FullItem } from '../../components';
 import { FaArrowLeft } from 'react-icons/fa';
@@ -31,7 +30,7 @@ const Movie: React.FC<Props> = () => {
   const getMovie = (): Promise<IMovie> => {
     return new Promise((resolve, reject) => {
       axios
-        .get('/movies/' + params.id, {
+        .get(ROUTES.MOVIES + '/' + params.id, {
           headers: {
             token: localStorage.token,
           },

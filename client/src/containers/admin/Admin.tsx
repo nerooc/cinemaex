@@ -4,7 +4,10 @@ import DirectorsPanel from './DirectorsPanel';
 import MoviesPanel from './MoviesPanel';
 import ScreeningsPanel from './ScreeningsPanel';
 import styled from 'styled-components';
-import { Panel } from '../../components';
+import { Link } from 'react-router-dom';
+import colors from '../../constants/colors';
+import breakpoints from '../../constants/breakpoints';
+import { FaArrowLeft } from 'react-icons/fa';
 
 const Container = styled.div`
   display: flex;
@@ -49,12 +52,44 @@ const PanelContainer = styled.div`
   }
 `;
 
+const Return = styled(Link)`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${colors.secondaryBackground};
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  top: 16%;
+  left: 160px;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.2s;
+  background-color: ${colors.primaryColor};
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  ${breakpoints.desktop} {
+    left: 30px;
+    height: 40px;
+    width: 40px;
+    font-size: 20px;
+  }
+`;
+
 interface Props {}
 
 const Admin: React.FC<Props> = () => {
   const [activeTab, setActiveTab] = useState('actors');
   return (
     <Container>
+      <Return to="/dashboard">
+        <FaArrowLeft></FaArrowLeft>
+      </Return>
       <ButtonContainer>
         <Button onClick={() => setActiveTab('actors')}>Actors Panel</Button>
         <Button onClick={() => setActiveTab('directors')}>

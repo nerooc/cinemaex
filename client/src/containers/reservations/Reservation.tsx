@@ -1,5 +1,4 @@
 import React from 'react';
-import { parseDate } from '../../utils/parseDate';
 import axios from '../../utils/axios';
 import { ReservationPreview } from './Reservations';
 import { toast } from 'react-toastify';

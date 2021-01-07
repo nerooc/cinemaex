@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import axios from '../../utils/axios';
-import { parseDate } from '../../utils/parseDate';
 import { useAsync } from '../../hooks/useAsync';
 import Reservation from './Reservation';
-import { FaArrowLeft } from 'react-icons/fa';
 import Loading from '../common/Loading';
+import styled from 'styled-components';
+import { FaArrowLeft } from 'react-icons/fa';
+import breakpoints from '../../constants/breakpoints';
+import colors from '../../constants/colors';
 
 interface Props {}
 
@@ -20,6 +23,35 @@ export interface ReservationPreview {
 }
 
 interface ReservationArray extends Array<ReservationPreview> {}
+
+const Return = styled(Link)`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${colors.secondaryBackground};
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  top: 16%;
+  left: 160px;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.2s;
+  background-color: ${colors.primaryColor};
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  ${breakpoints.desktop} {
+    left: 30px;
+    height: 40px;
+    width: 40px;
+    font-size: 20px;
+  }
+`;
 
 const Reservations: React.FC<Props> = () => {
   const getReservations = (): Promise<ReservationArray> => {
@@ -47,6 +79,9 @@ const Reservations: React.FC<Props> = () => {
 
       {status === 'success' && value?.length !== 0 && (
         <>
+          <Return to="/dashboard">
+            <FaArrowLeft />
+          </Return>
           <h1 style={{ textAlign: 'center', margin: '50px 0' }}>
             Your reservations
           </h1>
