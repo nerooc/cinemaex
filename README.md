@@ -154,7 +154,7 @@ Widoki znajdujące się w bazie:
 
 - **screening_preview**  - widok prezentujący kilka podstawowych danych o seansie, służących do przedstawienia go na ogólnej liście
 
-# 3.2 Analiza zależności funkcyjnych i normalizacja tabel
+### 3.2 Analiza zależności funkcyjnych i normalizacja tabel
 
 **- Pierwsza postać normalna (1NF)**
 Wszystkie tabele powiązane z bazą została zdefiniowana według klucza podstawowego - id. Wszystkie dane są atomowe. Odpowiednie zestawy danych powiązane ze sobą znajdują się w tych samych tabelach.
