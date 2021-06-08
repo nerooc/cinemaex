@@ -1,11 +1,9 @@
+
+
 ![logo](https://github.com/nerooc/cinemaex/blob/main/docs/images/logo.png)
-
-
 ### Tomasz Gajda
-# cinemaex
-Aplikacja imitująca serwis internetowy reprezentujący kino nazwie **cinemaex**
 
-## I. Projekt koncepcji, założenia 
+## I. Koncepcja projektu, założenia 
 
 
 ### 1.1. Zdefiniowanie tematu projektu 
@@ -43,18 +41,16 @@ W bazie powinny pojawić się również systemy walidujące i przyjemny dla oka 
 Różnicę między diagramami stanowi dostęp do dodawania nowych danych, który udostępniony jest dla konta o roli administratora.
 
 
-DIAGRAM PRZEPŁYWU DANYCH DLA UŻYTKOWNIKA
+**DIAGRAM PRZEPŁYWU DANYCH DLA UŻYTKOWNIKA**
+
+<img src="https://github.com/nerooc/cinemaex/blob/main/docs/images/dfd_user.png" alt="user_dfd"
+	title="user_dfd" width="700" height="600" />
 
 
-![user_dfd](https://github.com/nerooc/cinemaex/blob/main/docs/images/dfd_user.png)
+**DIAGRAM PRZEPŁYWU DANYCH DLA ADMINISTRATORA**
 
-
-
-DIAGRAM PRZEPŁYWU DANYCH DLA ADMINISTRATORA
-
-![admin_dfd](https://github.com/nerooc/cinemaex/blob/main/docs/images/dfd_admin.png)
-
-
+<img src="https://github.com/nerooc/cinemaex/blob/main/docs/images/dfd_admin.png" alt="admin_dfd"
+	title="admin_dfd" width="700" height="600" />
 
 
 
@@ -280,7 +276,7 @@ Administrator może manipulować danymi dotyczącymi reżyserów. Może ich doda
 
 
 
-##### Dodawanie i usuwanie filmów
+#### Dodawanie i usuwanie filmów
 
 Administrator może manipulować danymi dotyczącymi filmów. Może je dodawać i usuwać. Za pomocą wyzwalaczy dbamy o to by wraz z usuniętymi filmami, usuwane były seanse, na których miały być odtwarzane.
 
