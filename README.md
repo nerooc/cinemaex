@@ -138,7 +138,7 @@ Każda tabela zawiera atrybut id, służący do jednoznacznego określenia konkr
 
 Widoki znajdujące się w bazie:
 
-- **b** - widok prezentujący pełne dane aktora, służące do przedstawienia go na jego pełnej podstronie
+- **actor_full** - widok prezentujący pełne dane aktora, służące do przedstawienia go na jego pełnej podstronie
 
 - **actor_preview** - widok prezentujący kilka podstawowych danych aktora, służących do przedstawienia go na ogólnej liście
 
